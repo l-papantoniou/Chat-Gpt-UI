@@ -1,40 +1,34 @@
-import React from 'react';
-import {Box, Button, Typography} from '@mui/material';
-
-//styles
-const avatarStyle = {
-    backgroundColor: "#1bbd7e",
-    marginTop: "20px",
-};
-const btnstyle = {margin: "8px 0"};
+import React, { useState } from 'react';
+import { Container, Paper } from '@mui/material';
+import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import LoginForm from '../components/LoginForm';
+import '../css/LoginPage.css';
 
 const LoginPage = () => {
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        // Authentication logic here
+    };
 
     return (
-        <div
-            style={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                height: "100vh",
-            }}
-        >
-            <Box textAlign="center" sx={{p: 5, border: "1px solid black"}}>
-                <Typography>
-                    Πρέπει να συνδεθείτε με τους προσωπικούς σας κωδικούς TaxisNet
-                </Typography>
-                <br/>
-                <br/>
-                <Button
-                    color="primary"
-                    variant="contained"
-                    onClick={() => {
-                    }}
-                >
-                    <Typography>{"Είσοδος"}</Typography>
-                </Button>
-            </Box>
-        </div>
+        <Container component="main" maxWidth="xs" className="login-container">
+            <Paper className="login-paper" elevation={6}>
+                <div className="icon-container">
+                    <LockOutlinedIcon color="primary" style={{ fontSize: 40 }} />
+                </div>
+                <LoginForm
+                    email={email}
+                    setEmail={setEmail}
+                    password={password}
+                    setPassword={setPassword}
+                    handleSubmit={handleSubmit}
+                />
+            </Paper>
+        </Container>
     );
 }
+
 export default LoginPage;
