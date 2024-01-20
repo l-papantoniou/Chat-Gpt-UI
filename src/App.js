@@ -7,6 +7,7 @@ const App = () => (
     <Router>
         <NavigationBar/>
         <Routes>
+
             <Route path="/login" element={<LoginPage/>}/>
             {/* Add more routes here */}
         </Routes>

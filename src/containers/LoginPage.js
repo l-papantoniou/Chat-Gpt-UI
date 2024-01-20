@@ -1,34 +1,62 @@
-import React, { useState } from 'react';
-import { Container, Paper } from '@mui/material';
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import LoginForm from '../components/LoginForm';
-import '../css/LoginPage.css';
+import React, {useState} from 'react';
+import {Grid, Paper} from '@mui/material';
+import axios from 'axios';
+import {useLoginStyles} from "../themes/LoginTheme";
+import Logo from "../assets/Logo.png"
+import Moto from "../assets/Moto.png"
+import {LoginForm} from "../components/LoginForm";
 
-const LoginPage = () => {
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
 
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        // Authentication logic here
+const Login = () => {
+    const [inputs, setInputs] = useState({email: '', password: ''});
+    const [errorMessage, setErrorMessage] = useState('');
+
+    const styles = useLoginStyles();
+
+    const handleInputChange = (event) => {
+        const {name, value} = event.target;
+        setInputs({...inputs, [name]: value});
     };
 
+    const onSubmitLoginForm = async (event) => {
+        event.preventDefault()
+        try {
+            const response = await axios.post('/api/login', inputs);
+            if (response.status === 200) {
+                localStorage.setItem("Authorization", response.headers["authorization"]);
+            } else {
+                // Handle any non-200 responses here
+                setErrorMessage("Login failed. Please check your credentials.");
+            }
+        } catch (error) {
+            setErrorMessage(error.response?.data?.message || 'An unexpected error occurred');
+            console.error('Login error', error);
+        }
+    };
+
+
     return (
-        <Container component="main" maxWidth="xs" className="login-container">
-            <Paper className="login-paper" elevation={6}>
-                <div className="icon-container">
-                    <LockOutlinedIcon color="primary" style={{ fontSize: 40 }} />
-                </div>
+        <Grid container style={{height: '100vh'}} justifyContent="center" alignItems="center" overflow="hidden">
+            <Paper elevation={12} sx={styles.formPaper}>
+                {/* Logo and Motto should be in their own container for alignment */}
+                <Grid container direction="row" alignItems="flex-start" sx={{width: '100%'}}>
+                    <Grid item>
+                        <img src={Logo} alt="App Logo" style={styles.appLogo}/>
+                    </Grid>
+                    <Grid item>
+                        <img src={Moto} alt="App Motto" style={styles.appMoto}/>
+                    </Grid>
+                </Grid>
                 <LoginForm
-                    email={email}
-                    setEmail={setEmail}
-                    password={password}
-                    setPassword={setPassword}
-                    handleSubmit={handleSubmit}
+                    inputs={inputs}
+                    handleInputChange={handleInputChange}
+                    onSubmitLoginForm={onSubmitLoginForm}
+                    styles={styles}
+                    errorMessage={errorMessage}
                 />
             </Paper>
-        </Container>
+        </Grid>
     );
-}
+};
 
-export default LoginPage;
+export default Login;

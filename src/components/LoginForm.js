@@ -1,53 +1,58 @@
-import React from 'react';
-import { Button, TextField, Typography, Grid, Link } from '@mui/material';
+import {Avatar, Box, Button, Grid, TextField, Typography} from "@mui/material";
+import React from "react";
+import {ErrorMessage} from "../shared/ErrorMessage";
+import LockIcon from "@mui/icons-material/Lock";
+import {Link} from "react-router-dom";
 
-const LoginForm = ({ email, setEmail, password, setPassword, handleSubmit }) => {
+export const LoginForm = ({inputs, handleInputChange, onSubmitLoginForm, styles, errorMessage}) => {
     return (
         <>
-            <Typography component="h1" variant="h5" className="title">
-                Sign in
+            <Avatar sx={styles.logo}>
+                <LockIcon/>
+            </Avatar>
+            <Typography sx={styles.typographyLogin}>
+                Login
             </Typography>
-            <form className="form" noValidate onSubmit={handleSubmit}>
+            <ErrorMessage message={errorMessage}/>
+            <Box component="form" onSubmit={onSubmitLoginForm}>
                 <TextField
-                    variant="outlined"
-                    margin="normal"
                     required
                     fullWidth
-                    label="Email Address"
-                    autoComplete="email"
-                    autoFocus
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
+                    id="email"
+                    label="Email"
+                    name="email"
+                    autoComplete="off"
+                    value={inputs.email}
+                    onChange={handleInputChange}
+                    sx={styles.input}
                 />
                 <TextField
-                    variant="outlined"
-                    margin="normal"
                     required
                     fullWidth
+                    id="password"
                     label="Password"
                     type="password"
-                    autoComplete="current-password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
+                    name="password"
+                    autoComplete="off"
+                    value={inputs.password}
+                    onChange={handleInputChange}
+                    sx={styles.input}
                 />
                 <Button
                     type="submit"
                     fullWidth
                     variant="contained"
-                    className="submit-button"
+                    sx={styles.submitButton}
                 >
                     Sign In
                 </Button>
-                <Grid container>
-                    <Grid item>
-                        <Link href="#" variant="body2">
-                            {"Don't have an account?"}<br/>{"Sign Up"}
-                        </Link>
-                    </Grid>
+                <br/>
+                <Grid container justifyContent="flex-end" sx={{mt: 2}}>
+                    <Link to="/signup" style={styles.link}>
+                        Don't have an account? Sign Up
+                    </Link>
                 </Grid>
-            </form>
+            </Box>
         </>
-    );
-};
-
-export default LoginForm;
+    )
+}
