@@ -5,6 +5,7 @@ import {useLoginStyles} from "../themes/LoginTheme";
 import Logo from "../assets/Logo.png"
 import Moto from "../assets/Moto.png"
 import {LoginForm} from "../components/LoginForm";
+import {AppLogo} from "../components/AppLogo";
 
 
 const Login = () => {
@@ -38,15 +39,7 @@ const Login = () => {
     return (
         <Grid container style={{height: '100vh'}} justifyContent="center" alignItems="center" overflow="hidden">
             <Paper elevation={12} sx={styles.formPaper}>
-                {/* Logo and Motto should be in their own container for alignment */}
-                <Grid container direction="row" alignItems="flex-start" sx={{width: '100%'}}>
-                    <Grid item>
-                        <img src={Logo} alt="App Logo" style={styles.appLogo}/>
-                    </Grid>
-                    <Grid item>
-                        <img src={Moto} alt="App Motto" style={styles.appMoto}/>
-                    </Grid>
-                </Grid>
+                <AppLogo styles={styles}/>
                 <LoginForm
                     inputs={inputs}
                     handleInputChange={handleInputChange}
