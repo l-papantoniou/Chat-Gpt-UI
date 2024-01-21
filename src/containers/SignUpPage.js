@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {Grid, Paper} from '@mui/material';
+import {Container, Grid, Paper} from '@mui/material';
 import {useLoginStyles} from "../themes/LoginTheme";
 import {SignUpForm} from "../components/SignUpForm";
 import axios from "axios";
@@ -39,18 +39,15 @@ export const SignUp = () => {
     };
 
     return (
-        <Grid container style={{height: '100vh'}} justifyContent="center" alignItems="center" overflow="hidden">
-            <Paper elevation={12} sx={styles.formPaper}>
-                <AppLogo styles={styles}/>
-                <SignUpForm
-                    inputs={inputs}
-                    handleInputChange={handleInputChange}
-                    onSubmitSignInForm={onSubmitSignUpForm}
-                    styles={styles}
-                    errorMessage={errorMessage}
-                />
-            </Paper>
-        </Grid>
+        <Container maxWidth={false} style={styles.container}>
+            <SignUpForm
+                inputs={inputs}
+                handleInputChange={handleInputChange}
+                onSubmitSignInForm={onSubmitSignUpForm}
+                styles={styles}
+                errorMessage={errorMessage}
+            />
+        </Container>
     );
 };
 

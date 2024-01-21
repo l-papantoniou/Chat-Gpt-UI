@@ -48,7 +48,7 @@ export const LoginForm = ({inputs, handleInputChange, onSubmitLoginForm, styles,
                 </Button>
                 <br/>
                 <Grid container justifyContent="flex-end" sx={{mt: 2}}>
-                    <Link to="/signup" style={styles.link}>
+                    <Link to="/sign-up" style={styles.link}>
                         Don't have an account? Sign Up
                     </Link>
                 </Grid>

@@ -1,11 +1,8 @@
 import React, {useState} from 'react';
-import {Grid, Paper} from '@mui/material';
+import {Container} from '@mui/material';
 import axios from 'axios';
 import {useLoginStyles} from "../themes/LoginTheme";
-import Logo from "../assets/Logo.png"
-import Moto from "../assets/Moto.png"
 import {LoginForm} from "../components/LoginForm";
-import {AppLogo} from "../components/AppLogo";
 
 
 const Login = () => {
@@ -37,18 +34,15 @@ const Login = () => {
 
 
     return (
-        <Grid container style={{height: '100vh'}} justifyContent="center" alignItems="center" overflow="hidden">
-            <Paper elevation={12} sx={styles.formPaper}>
-                <AppLogo styles={styles}/>
-                <LoginForm
-                    inputs={inputs}
-                    handleInputChange={handleInputChange}
-                    onSubmitLoginForm={onSubmitLoginForm}
-                    styles={styles}
-                    errorMessage={errorMessage}
-                />
-            </Paper>
-        </Grid>
+        <Container maxWidth={false} style={styles.container}>
+            <LoginForm
+                inputs={inputs}
+                handleInputChange={handleInputChange}
+                onSubmitLoginForm={onSubmitLoginForm}
+                styles={styles}
+                errorMessage={errorMessage}
+            />
+        </Container>
     );
 };
 

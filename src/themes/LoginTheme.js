@@ -1,4 +1,3 @@
-// Moved outside the component to avoid redefinition on every render
 import {useTheme} from "@mui/material";
 
 export const useLoginStyles = () => {
@@ -16,7 +15,7 @@ export const useLoginStyles = () => {
             overflow: "auto"
         },
         logo: {
-            bgcolor: '#910606',
+            bgcolor: '#354e70',
             marginBottom: theme.spacing(1),
         },
         appLogo: {
@@ -40,10 +39,10 @@ export const useLoginStyles = () => {
         submitButton: {
             marginTop: theme.spacing(2),
             textTransform: 'none', // Prevents uppercase transformation
-            backgroundColor: '#9f1111', // Example button color
+            backgroundColor: '#405d8a', // Example button color
             color: 'white',
             '&:hover': {
-                backgroundColor: '#5e0404', // Darken the color slightly on hover
+                backgroundColor: '#182c46', // Darken the color slightly on hover
             }
         },
         loginForm: {
@@ -62,6 +61,13 @@ export const useLoginStyles = () => {
                 textDecoration: 'underline', // Optional: add underline on hover
                 color: theme.palette.secondary.dark, // Darken color on hover
             }
+        },
+        container:{
+            height: '85vh',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            justifyContent: 'center'
         }
 
     };
