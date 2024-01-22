@@ -142,7 +142,7 @@ export const CustomMuiTextField = (props) => {
                     <DialogContent>
                         <DialogContentText>
                             {isValidElement(props.children) &&
-                                cloneElement (props.children, {handleIsOpen: handleOpen})}
+                                cloneElement(props.children, {handleIsOpen: handleOpen})}
                         </DialogContentText>
                     </DialogContent>
                 </Dialog>

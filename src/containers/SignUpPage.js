@@ -1,9 +1,8 @@
 import React, {useState} from 'react';
-import {Container, Grid, Paper} from '@mui/material';
+import {Container} from '@mui/material';
 import {useLoginStyles} from "../themes/LoginTheme";
 import {SignUpForm} from "../components/SignUpForm";
 import axios from "axios";
-import {AppLogo} from "../components/AppLogo";
 
 export const SignUp = () => {
     const styles = useLoginStyles();
