@@ -36,10 +36,10 @@ const TextDialogEditor = ({open, title, value, onChange, onClose, onSave}) => {
                 />
             </DialogContent>
             <DialogActions>
-                <Button onClick={onClose} color="primary">
+                <Button onClick={onClose} color="inherit">
                     Cancel
                 </Button>
-                <Button onClick={onSave} color="primary">
+                <Button onClick={onSave} color="inherit">
                     Save
                 </Button>
             </DialogActions>

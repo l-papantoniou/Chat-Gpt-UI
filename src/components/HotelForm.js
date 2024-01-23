@@ -15,10 +15,11 @@ import {
 import EditIcon from '@mui/icons-material/Edit';
 import ListIcon from '@mui/icons-material/List';
 import TextDialogEditor from "../shared/DialogTextfield";
-import AmenitiesDialog from "../shared/AmenitiesDialog";
+import AmenitiesDialog from "./AmenitiesDialog";
 import HotelIcon from '@mui/icons-material/Hotel';
 import InputAdornment from "@mui/material/InputAdornment";
 import {useHotelFormStyle} from "../themes/HotelFormTheme";
+import {hotelCompanyTypes} from "../statics/hotelCompanyTypes";
 
 const HotelForm = ({onSave}) => {
 
@@ -33,13 +34,6 @@ const HotelForm = ({onSave}) => {
     });
     const [openDescriptionDialog, setOpenDescriptionDialog] = useState(false);
 
-    const hotelCompanyTypes = [
-        'Budget',
-        'Boutique',
-        'Resort',
-        'Luxury',
-        // Add more types as needed
-    ];
 
     const [amenitiesDialogOpen, setAmenitiesDialogOpen] = useState(false);
     const handleChange = (event) => {
@@ -80,7 +74,6 @@ const HotelForm = ({onSave}) => {
             hotelCompanyType: '',
             description: '',
             amenities: [],
-            // ... reset other fields as necessary ...
         });
     };
     return (
@@ -88,7 +81,7 @@ const HotelForm = ({onSave}) => {
         <Box component="form" onSubmit={handleSubmit} noValidate sx={{mt: 1}}>
             <Grid container spacing={2} alignItems="center" justifyContent="center">
                 <Grid item>
-                    <HotelIcon color="primary" sx={{fontSize: 40}}/>
+                    <HotelIcon color="secondary" sx={{fontSize: 40}}/>
                 </Grid>
                 <Grid item>
                     <Typography variant="h4" component="h1" gutterBottom sx={{fontWeight: 'bold'}}>
@@ -156,7 +149,7 @@ const HotelForm = ({onSave}) => {
                     endAdornment: (
                         <InputAdornment position="end">
                             <IconButton onClick={() => setOpenDescriptionDialog(true)} edge="end">
-                                <EditIcon />
+                                <EditIcon  />
                             </IconButton>
                         </InputAdornment>
                     ),

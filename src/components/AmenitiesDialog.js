@@ -59,7 +59,7 @@ const AmenitiesDialog = ({open, onClose, selectedAmenities, onAmenityToggle}) =>
             ))}
         </DialogContent>
             <DialogActions>
-                <Button onClick={onClose} color="primary">
+                <Button onClick={onClose} color="inherit">
                     Done
                 </Button>
             </DialogActions>
