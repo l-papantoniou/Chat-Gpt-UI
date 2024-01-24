@@ -9,10 +9,11 @@ import AppDrawer from "./AppDrawer";
 import {useNavigate} from "react-router-dom";
 import {useThemeContext} from "../containers/ThemeProvider";
 import {CircularTimer} from "./Timer";
+import {useAuth} from "../shared/AuthContext";
 
 const AppToolbar = ({drawerOpen, handleDrawerToggle, styles}) => {
     const navigate = useNavigate();
-
+    const { user } = useAuth();
     const handleHomeClick = () => {
         navigate('/'); // Navigate to homepage route
     };
@@ -53,7 +54,7 @@ const AppToolbar = ({drawerOpen, handleDrawerToggle, styles}) => {
             <Typography component="div" sx={{color: 'white', marginLeft: '40px', marginRight: "30px"}}>
                 Logged in as:
                 <br/>
-                Lampis Papantoniou
+                {user.username}
             </Typography>
             <CircularTimer initialTime={900} />
             {/* Add more icons or user display here */}

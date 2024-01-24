@@ -1,11 +1,8 @@
-// navigationItems.js or within your component file
 import HomeIcon from '@mui/icons-material/Home';
 import InfoIcon from '@mui/icons-material/Info';
 import HotelIcon from '@mui/icons-material/Hotel';
-import EmojiObjectsIcon from '@mui/icons-material/EmojiObjects'; // For a brain-like icon
+import EmojiObjectsIcon from '@mui/icons-material/EmojiObjects';
 import SettingsIcon from '@mui/icons-material/Settings';
-
-
 
 
 export const navigationItems = [

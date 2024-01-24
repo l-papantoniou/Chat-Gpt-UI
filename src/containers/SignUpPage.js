@@ -39,7 +39,7 @@ export const SignUp = () => {
         try {
             const response = await axiosInstance.post('/user/register', inputs);
             console.log(inputs);
-            login(response.data.token);
+            login(response.data.token, response.data.user.id, response.data.user.username);
             navigate('/');
 
             // Send data to your API or server

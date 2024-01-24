@@ -27,7 +27,7 @@ const Login = () => {
             console.log(inputs);
             const response = await axiosInstance.post(`/user/login`, inputs);
             if (response.status === 200 && response.data.token) {
-                login(response.data.token);
+                login(response.data.token, response.data.user.id, response.data.user.username);
                 navigate('/')
                 // localStorage.setItem("Authorization", response.headers["authorization"]);
             } else {

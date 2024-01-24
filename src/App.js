@@ -11,6 +11,7 @@ import HomePage from "./containers/HomePage";
 import SettingsPage from "./containers/SettingsPage";
 import {AuthProvider} from './shared/AuthContext';
 import ProtectedRoute from "./routes/ProtectedRoute";
+import HotelCompaniesPage from "./containers/HotelCompaniesPage";
 
 const App = () => (
     <AuthProvider>
@@ -27,6 +28,7 @@ const App = () => (
                             <Route path="/" element={<HomePage/>}/>
                             <Route path="/input" element={<InputHotelPage/>}/>
                             <Route path="/settings" element={<SettingsPage/>}/>
+                            <Route path="/hotel-companies" element={<HotelCompaniesPage/>}/>
                             <Route path="*" element={<NotFoundPage/>}/>
                         </Route>
                     </Routes>
