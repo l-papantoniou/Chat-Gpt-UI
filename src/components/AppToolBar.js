@@ -8,6 +8,7 @@ import HomeIcon from '@mui/icons-material/Home';
 import AppDrawer from "./AppDrawer";
 import {useNavigate} from "react-router-dom";
 import {useThemeContext} from "../containers/ThemeProvider";
+import {CircularTimer} from "./Timer";
 
 const AppToolbar = ({drawerOpen, handleDrawerToggle, styles}) => {
     const navigate = useNavigate();
@@ -49,9 +50,12 @@ const AppToolbar = ({drawerOpen, handleDrawerToggle, styles}) => {
             </IconButton>
 
             {/* Box to show logged-in user */}
-            <Typography component="div" sx={{color: 'white', marginLeft: '30px'}}>
-                Logged in as: Lampis Papantoniou
+            <Typography component="div" sx={{color: 'white', marginLeft: '40px', marginRight: "30px"}}>
+                Logged in as:
+                <br/>
+                Lampis Papantoniou
             </Typography>
+            <CircularTimer initialTime={900} />
             {/* Add more icons or user display here */}
         </Toolbar>
     );
