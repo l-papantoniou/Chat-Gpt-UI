@@ -9,24 +9,31 @@ import {ThemeProvider} from "./containers/ThemeProvider";
 import NotFoundPage from "./containers/NotFoundPage";
 import HomePage from "./containers/HomePage";
 import SettingsPage from "./containers/SettingsPage";
+import {AuthProvider} from './shared/AuthContext';
+import ProtectedRoute from "./routes/ProtectedRoute";
 
 const App = () => (
-    <ThemeProvider>
-        <Router>
-            <AppContainer>
-                <Routes>
-                    <Route path="/" element={<HomePage/>}/>
-                    <Route path="/login" element={<LoginPage/>}/>
-                    <Route path="/sign-up" element={<SignUpPage/>}/>
-                    <Route path="/input" element={<InputHotelPage/>}/>
-                    <Route path="/about" element={<AboutPage/>}/>
-                    <Route path="/settings" element={<SettingsPage/>}/>
-                    <Route path="*" element={<NotFoundPage />} />
-                    {/* Add more routes here */}
-                </Routes>
-            </AppContainer>
-        </Router>
-    </ThemeProvider>
+    <AuthProvider>
+        <ThemeProvider>
+            <Router>
+                <AppContainer>
+                    <Routes>
+                        <Route path="/login" element={<LoginPage/>}/>
+                        <Route path="/register" element={<SignUpPage/>}/>
+                        <Route path="/about" element={<AboutPage/>}/>
+                        <Route path="*" element={<NotFoundPage/>}/>
+
+                        <Route element={<ProtectedRoute/>}>
+                            <Route path="/" element={<HomePage/>}/>
+                            <Route path="/input" element={<InputHotelPage/>}/>
+                            <Route path="/settings" element={<SettingsPage/>}/>
+                            <Route path="*" element={<NotFoundPage/>}/>
+                        </Route>
+                    </Routes>
+                </AppContainer>
+            </Router>
+        </ThemeProvider>
+    </AuthProvider>
 );
 
 export default App;

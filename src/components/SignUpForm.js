@@ -1,7 +1,8 @@
-import {Avatar, Box, Button, TextField, Typography} from "@mui/material";
+import {Avatar, Box, Button, Grid, TextField, Typography} from "@mui/material";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import React from "react";
 import {ErrorMessage} from "../shared/ErrorMessage";
+import {Link} from "react-router-dom";
 
 export const SignUpForm = ({inputs, handleInputChange, onSubmitSignInForm, styles, errorMessage}) => {
     return (
@@ -22,6 +23,17 @@ export const SignUpForm = ({inputs, handleInputChange, onSubmitSignInForm, style
                     name="email"
                     autoComplete="email"
                     value={inputs.email}
+                    onChange={handleInputChange}
+                    margin="normal"
+                />
+                <TextField
+                    required
+                    fullWidth
+                    id="username"
+                    label="Username"
+                    name="username"
+                    autoComplete="username"
+                    value={inputs.username}
                     onChange={handleInputChange}
                     margin="normal"
                 />
@@ -57,6 +69,12 @@ export const SignUpForm = ({inputs, handleInputChange, onSubmitSignInForm, style
                 >
                     Sign Up
                 </Button>
+                <br/>
+                <Grid container justifyContent="flex-end" sx={{mt: 2}}>
+                    <Link to="/login" style={styles.link}>
+                        Already have an account? Login
+                    </Link>
+                </Grid>
             </Box>
         </>
     )

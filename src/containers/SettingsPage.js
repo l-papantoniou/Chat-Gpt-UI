@@ -3,7 +3,7 @@ import {Container, Typography, Box, Paper, List, ListItem, ListItemText, Divider
 import {useThemeContext} from "./ThemeProvider";
 
 const SettingsPage = () => {
-    // Example state for a switch - you can expand this with useState hooks for each setting
+
     const {mode, toggleTheme} = useThemeContext();
 
     return (

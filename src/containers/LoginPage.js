@@ -1,13 +1,18 @@
 import React, {useState} from 'react';
 import {Container} from '@mui/material';
-import axios from 'axios';
 import {useLoginStyles} from "../themes/LoginTheme";
 import {LoginForm} from "../components/LoginForm";
-
+import {useAuth} from '../shared/AuthContext';
+import {useNavigate} from "react-router-dom";
+import axiosInstance from '../utils/axiosInstance';
 
 const Login = () => {
     const [inputs, setInputs] = useState({email: '', password: ''});
     const [errorMessage, setErrorMessage] = useState('');
+
+    const navigate = useNavigate();
+
+    const {login} = useAuth();
 
     const styles = useLoginStyles();
 
@@ -19,9 +24,12 @@ const Login = () => {
     const onSubmitLoginForm = async (event) => {
         event.preventDefault()
         try {
-            const response = await axios.post('/api/login', inputs);
-            if (response.status === 200) {
-                localStorage.setItem("Authorization", response.headers["authorization"]);
+            console.log(inputs);
+            const response = await axiosInstance.post(`/user/login`, inputs);
+            if (response.status === 200 && response.data.token) {
+                login(response.data.token);
+                navigate('/')
+                // localStorage.setItem("Authorization", response.headers["authorization"]);
             } else {
                 // Handle any non-200 responses here
                 setErrorMessage("Login failed. Please check your credentials.");
