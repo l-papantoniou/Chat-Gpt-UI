@@ -3,6 +3,8 @@ import {useTheme} from "@mui/material";
 export const useHotelFormStyle = () => {
     const theme = useTheme();
     return {
+        container: {
+        },
         input: {
             marginBottom: theme.spacing(2),
         },
