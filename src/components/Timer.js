@@ -8,6 +8,9 @@ export const CircularTimer = ({initialTime, isAuthenticated, onTimeEnd}) => {
     // State to keep track of the time left
     const [timeLeft, setTimeLeft] = useState(initialTime);
 
+    // Calculate the progress percentage based on time left
+    const progress = (timeLeft / initialTime) * 100;
+
     useEffect(() => {
         // Do not run the timer if the user is not authenticated
         if (!isAuthenticated) {
@@ -37,7 +40,7 @@ export const CircularTimer = ({initialTime, isAuthenticated, onTimeEnd}) => {
         <Box position="relative" display="inline-flex">
             <CircularProgress
                 variant="determinate"
-                value={timeLeft}
+                value={progress}
                 size={50}
                 thickness={3}
                 sx={{color: "white"}}

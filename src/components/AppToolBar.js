@@ -19,15 +19,17 @@ const AppToolbar = ({drawerOpen, handleDrawerToggle, styles}) => {
     return (
         <Toolbar>
             {/* Drawer toggle button */}
-            <IconButton
-                color="inherit"
-                aria-label="open drawer"
-                edge="start"
-                onClick={handleDrawerToggle}
-                sx={{mr: 2}}
-            >
-                <MenuIcon sx={{color: 'white'}}/>
-            </IconButton>
+            {isAuthenticated &&
+                <IconButton
+                    color="inherit"
+                    aria-label="open drawer"
+                    edge="start"
+                    onClick={handleDrawerToggle}
+                    sx={{mr: 2}}
+                >
+                    <MenuIcon sx={{color: 'white'}}/>
+                </IconButton>
+            }
             <AppDrawer
                 open={drawerOpen}
                 onToggleDrawer={handleDrawerToggle}

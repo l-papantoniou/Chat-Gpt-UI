@@ -77,7 +77,7 @@ const HotelForm = ({hotel, setHotel, styles, errorMessage, handleInputChange, ha
                     </Grid>
                     <Grid item>
                         <Typography variant="h4" component="h1" gutterBottom sx={{fontWeight: 'bold'}}>
-                            Add Your Hotel-Company
+                            Your Hotel-Company
                         </Typography>
                     </Grid>
                 </Grid>
