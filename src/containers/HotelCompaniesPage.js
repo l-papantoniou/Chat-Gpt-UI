@@ -34,15 +34,27 @@ const HotelCompaniesPage = () => {
         const styles = useHotelCompaniesStyle();
         const navigate = useNavigate();
         const {user} = useAuth();
-        const handleSnackbarClose = () => {
-            setSuccessMessage('');
-            setErrorMessage('');
-        };
+
 
         const handleSort = (field) => {
             const isAsc = sortConfig.field === field && sortConfig.direction === 'asc';
             setSortConfig({field, direction: isAsc ? 'desc' : 'asc'});
         };
+
+        const sortedHotelCompanies = useMemo(() => {
+            if (!sortConfig.field) {
+                return hotelCompanies;
+            }
+            return [...hotelCompanies].sort((a, b) => {
+                if (a[sortConfig.field] < b[sortConfig.field]) {
+                    return sortConfig.direction === 'asc' ? -1 : 1;
+                }
+                if (a[sortConfig.field] > b[sortConfig.field]) {
+                    return sortConfig.direction === 'asc' ? 1 : -1;
+                }
+                return 0;
+            });
+        }, [hotelCompanies, sortConfig]);
 
         const fetchHotelCompanies = async () => {
             try {
@@ -54,6 +66,10 @@ const HotelCompaniesPage = () => {
             }
         };
 
+        const handleSnackbarClose = () => {
+            setSuccessMessage('');
+            setErrorMessage('');
+        };
 
         const handleDeleteClick = (hotelId) => {
             setOpenConfirmDialog(true);
@@ -71,9 +87,15 @@ const HotelCompaniesPage = () => {
         const handleDelete = async (hotelId) => {
             try {
                 const response = axiosInstance.delete(`/hotel-companies/delete/${hotelId}`)
-                    .then((response) => {
-                        fetchHotelCompanies()
-                    })
+                setSuccessMessage("Your Hotel company has been successfully deleted");
+                setErrorMessage(""); // Clear any previous error
+
+                setTimeout(() => {
+                    setSuccessMessage(''); // Hide the success message
+                    fetchHotelCompanies();
+                }, 1000); // Navigate after 1.5 seconds
+
+                fetchHotelCompanies();
                 // Display success message or update UI accordingly
             } catch (error) {
                 console.error('Error deleting hotel company:', error);
@@ -84,21 +106,6 @@ const HotelCompaniesPage = () => {
         const handleEdit = (hotelId) => {
             navigate(`/edit-hotel/${hotelId}`);
         };
-
-        const sortedHotelCompanies = useMemo(() => {
-            if (!sortConfig.field) {
-                return hotelCompanies;
-            }
-            return [...hotelCompanies].sort((a, b) => {
-                if (a[sortConfig.field] < b[sortConfig.field]) {
-                    return sortConfig.direction === 'asc' ? -1 : 1;
-                }
-                if (a[sortConfig.field] > b[sortConfig.field]) {
-                    return sortConfig.direction === 'asc' ? 1 : -1;
-                }
-                return 0;
-            });
-        }, [hotelCompanies, sortConfig]);
 
 
         useEffect(() => {
