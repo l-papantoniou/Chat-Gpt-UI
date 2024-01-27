@@ -17,10 +17,6 @@ export const InputHotelPage = () => {
     const navigate = useNavigate();
     const {user} = useAuth();
     const styles = useHotelFormStyle();
-    const initialAssetsState = Object.keys(amenityOptions).reduce((acc, category) => {
-        acc[category] = [];
-        return acc;
-    }, {});
 
     const [hotel, setHotel] = useState({
         name: '',
@@ -56,11 +52,11 @@ export const InputHotelPage = () => {
                     setSuccessMessage('');
                     setErrorMessage('');
                 }}
-                anchorOrigin={{ vertical: 'top', horizontal: 'right' }} // Positioning it at the top-right
+                anchorOrigin={{vertical: 'top', horizontal: 'right'}} // Positioning it at the top-right
                 sx={{
                     // Custom styling
                     '& .MuiSnackbarContent-root': {
-                        minWidth: '350px', // Adjust size
+                        minWidth: '400px', // Adjust size
                         fontSize: '1rem', // Adjust font size
                     }
                 }}
