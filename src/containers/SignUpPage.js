@@ -7,7 +7,6 @@ import {useNavigate} from "react-router-dom";
 import axiosInstance from "../utils/axiosInstance";
 
 
-
 export const SignUp = () => {
     const styles = useLoginStyles();
     const [inputs, setInputs] = useState({
@@ -29,7 +28,6 @@ export const SignUp = () => {
     };
 
     const onSubmitSignUpForm = async (event) => {
-        console.log(inputs)
         event.preventDefault();
         // Perform validation, make sure passwords match, etc.
         if (inputs.password !== inputs.confirmPassword) {
@@ -38,7 +36,6 @@ export const SignUp = () => {
         }
         try {
             const response = await axiosInstance.post('/user/register', inputs);
-            console.log(inputs);
             login(response.data.token, response.data.newUser.id, response.data.newUser.username);
             navigate('/');
 

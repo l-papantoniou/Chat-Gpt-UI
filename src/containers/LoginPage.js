@@ -24,12 +24,10 @@ const Login = () => {
     const onSubmitLoginForm = async (event) => {
         event.preventDefault()
         try {
-            console.log(inputs);
             const response = await axiosInstance.post(`/user/login`, inputs);
             if (response.status === 200 && response.data.token) {
                 login(response.data.token, response.data.user.id, response.data.user.username);
                 navigate('/')
-                // localStorage.setItem("Authorization", response.headers["authorization"]);
             } else {
                 // Handle any non-200 responses here
                 setErrorMessage("Login failed. Please check your credentials.");

@@ -10,8 +10,6 @@ import CustomSnackbar from "../shared/CustomSnackBar"; // Adjust import as neede
 const EditHotel = () => {
     const [successMessage, setSuccessMessage] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
-    const [isSubmissionSuccessful, setIsSubmissionSuccessful] = useState(false);
-
 
     const navigate = useNavigate();
 
@@ -26,11 +24,9 @@ const EditHotel = () => {
         type: '',
         hotelier: user.id,
         assets: {},
-        // Assuming this is a selection of predefined types
     });
 
     const handleClearForm = () => {
-        // Clear the form by resetting the hotel state
         setHotel({
             name: '',
             location: '',
@@ -71,8 +67,6 @@ const EditHotel = () => {
             if (response.status === 200) {
                 setSuccessMessage("Hotel company successfully updated");
                 setErrorMessage(""); // Clear any previous error
-
-                setIsSubmissionSuccessful(true);
 
                 setTimeout(() => {
                     setSuccessMessage(''); // Hide the success message

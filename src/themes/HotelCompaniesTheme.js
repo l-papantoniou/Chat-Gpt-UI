@@ -8,6 +8,7 @@ export const useHotelCompaniesStyle = () => {
             boxShadow: theme.shadows[3], // Adding some shadow for depth
         },
         tableHeadCell: {
+            cursor: 'pointer',
             fontWeight: 'bold',
             backgroundColor: theme.palette.primary.dark,
             color: theme.palette.common.white,
