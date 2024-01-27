@@ -1,23 +1,23 @@
-import { Button, ToolbarProps } from "@mui/material";
+import {Button} from "@mui/material";
 import React from "react";
 import {
-    GridToolbarContainer,
     GridToolbarColumnsButton,
-    GridToolbarFilterButton,
+    GridToolbarContainer,
     GridToolbarDensitySelector,
     GridToolbarExport,
+    GridToolbarFilterButton,
 } from "@mui/x-data-grid";
-import { useNavigate } from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 
 export const CustomToolbar = () => {
     const navigate = useNavigate();
     return (
-        <div style={{ display: "flex", justifyContent: "space-between" }}>
+        <div style={{display: "flex", justifyContent: "space-between"}}>
             <GridToolbarContainer>
-                <GridToolbarColumnsButton />
-                <GridToolbarFilterButton />
-                <GridToolbarDensitySelector />
-                <GridToolbarExport />
+                <GridToolbarColumnsButton/>
+                <GridToolbarFilterButton/>
+                <GridToolbarDensitySelector/>
+                <GridToolbarExport/>
             </GridToolbarContainer>
             <Button
                 className="formButton"

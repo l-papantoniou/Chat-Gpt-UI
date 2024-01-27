@@ -1,51 +1,46 @@
 import React, {useState, useEffect} from 'react';
 import {Typography, Box, CircularProgress} from '@mui/material';
+import {formatTime} from "../utils/formatTime";
 
-// Helper function to format time
-const formatTime = (time) => {
-    const minutes = Math.floor(time / 60);
-    const seconds = time % 60;
-    return `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-};
 
-export const CircularTimer = ({initialTime}) => {
+// CircularTimer component
+export const CircularTimer = ({initialTime, isAuthenticated, onTimeEnd}) => {
+    // State to keep track of the time left
     const [timeLeft, setTimeLeft] = useState(initialTime);
-    const [progress, setProgress] = useState(100);
 
     useEffect(() => {
-        // Exit early when we reach 0
-        if (!timeLeft) return;
+        // Do not run the timer if the user is not authenticated
+        if (!isAuthenticated) {
+            setTimeLeft(initialTime);
+            return;
+        }
 
+        // Set up a timer using setInterval
         const intervalId = setInterval(() => {
             setTimeLeft((prevTime) => {
-                // If time left is greater than 0, decrement it, otherwise return 0
                 const updatedTime = prevTime - 1;
-                return updatedTime > 0 ? updatedTime : 0;
-            });
-            setProgress((prevProgress) => {
-                // Calculate the new progress
-                const newProgress = prevProgress - (100 / initialTime);
-                return newProgress > 0 ? newProgress : 0;
+                // When time reaches zero, clear the interval and invoke the callback
+                if (updatedTime <= 0) {
+                    clearInterval(intervalId);
+                    onTimeEnd();
+                    return 0;
+                }
+                return updatedTime;
             });
         }, 1000);
 
-        // Clear the interval if the time left is 0 to stop the timer
-        if (timeLeft === 0) {
-            clearInterval(intervalId);
-        }
-
-        // Clean up the interval on unmount
+        // Clear the interval on component unmount
         return () => clearInterval(intervalId);
-    }, [timeLeft, initialTime]);
+    }, [isAuthenticated, initialTime, onTimeEnd]);
 
     return (
         <Box position="relative" display="inline-flex">
             <CircularProgress
                 variant="determinate"
-                value={progress}
-                sx={{color: "white"}}
+                value={timeLeft}
                 size={50}
                 thickness={3}
+                sx={{color: "white"}}
             />
             <Box
                 top={0}
@@ -58,10 +53,9 @@ export const CircularTimer = ({initialTime}) => {
                 justifyContent="center"
             >
                 <Typography variant="caption" component="div" sx={{color: "white", padding: '5px', fontSize: '0.75em'}}>
-                    {formatTime(timeLeft)}
+                    {timeLeft > 0 ? formatTime(timeLeft) : "00:00"}
                 </Typography>
             </Box>
         </Box>
     );
 };
-

@@ -31,8 +31,10 @@ export const AuthProvider = ({children}) => {
 
                 if (response.status === 200) {
                     setIsAuthenticated(true)
-                    setUser({id: response.data.user.id,
-                        username: response.data.user.username})
+                    setUser({
+                        id: response.data.user.id,
+                        username: response.data.user.username
+                    })
                 } else {
                     setIsAuthenticated(false)
                     logout();
