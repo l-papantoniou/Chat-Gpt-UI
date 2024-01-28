@@ -70,7 +70,7 @@ const EditHotel = () => {
 
                 setTimeout(() => {
                     setSuccessMessage(''); // Hide the success message
-                    navigate('/hotel-companies'); // Update this with your actual route
+                    navigate('/hospitality-venues'); // Update this with your actual route
                 }, 1500); // Navigate after 1.5 seconds
             } else {
                 setErrorMessage("Failed to update hotel company");

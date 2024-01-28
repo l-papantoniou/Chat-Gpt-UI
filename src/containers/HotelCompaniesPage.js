@@ -104,7 +104,7 @@ const HotelCompaniesPage = () => {
         };
 
         const handleEdit = (hotelId) => {
-            navigate(`/edit-hotel/${hotelId}`);
+            navigate(`/edit-hospitality-venue/${hotelId}`);
         };
 
 

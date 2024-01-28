@@ -27,10 +27,10 @@ const App = () => (
 
                         <Route element={<ProtectedRoute/>}>
                             <Route path="/" element={<HomePage/>}/>
-                            <Route path="/input" element={<InputHotelPage/>}/>
+                            <Route path="/add-hospitality-venue" element={<InputHotelPage/>}/>
                             <Route path="/settings" element={<SettingsPage/>}/>
-                            <Route path="/hotel-companies" element={<HotelCompaniesPage/>}/>
-                            <Route path="/edit-hotel/:hotelId" element={<EditHotelPage/>}/>
+                            <Route path="/hospitality-venues" element={<HotelCompaniesPage/>}/>
+                            <Route path="/edit-hospitality-venue/:hotelId" element={<EditHotelPage/>}/>
                             <Route path="*" element={<NotFoundPage/>}/>
                         </Route>
                     </Routes>
