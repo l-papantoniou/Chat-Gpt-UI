@@ -29,7 +29,7 @@ export const amenityOptions = {
     },
     'Food & Drink': {
         icon: <FoodIcon/>,
-        amenities: ['Minibar', 'Electric kettle', 'Coffee machine', 'Dining table', 'Room service', 'Breakfast in the room', 'Restaurant', 'Bar']
+        amenities: ['Minibar', 'Electric kettle', 'Coffee machine', 'Dining table', 'Room service', 'Breakfast in the room', 'Very Good Breakfast', 'Tea/Coffee Maker in All Rooms', 'Restaurant', 'Bar']
     },
     'Services & Extras': {
         icon: <ServiceIcon/>,
@@ -41,7 +41,7 @@ export const amenityOptions = {
     },
     'Parking & Transportation': {
         icon: <ParkingIcon/>,
-        amenities: ['Free parking', 'Airport shuttle', 'Car hire', 'Secured parking', 'Street parking', 'Electric vehicle charging station']
+        amenities: ['Free parking', 'Private Parking', 'Airport shuttle', 'Car hire', 'Secured parking', 'Street parking', 'Electric vehicle charging station']
     },
     'General': {
         icon: <GeneralIcon/>,
