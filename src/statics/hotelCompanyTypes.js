@@ -1,4 +1,10 @@
 export const hotelCompanyTypes = [
+    'Hotel',
+    'Suites',
+    'Inn',
+    'B&B',
+    'House',
+    'Apartment',
     'Budget',
     'Boutique',
     'Resort',

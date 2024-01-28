@@ -38,12 +38,14 @@ export const useHotelFormStyle = () => {
         inputSection: {
             p: 2,
             borderRadius: '8px',
-            boxShadow: '0px 2px 4px rgba(0,0,0,0.2)', // Adds a subtle shadow
+            boxShadow: '0px 2px 4px rgba(0,0,0,0.2)',
         },
         inputField: {
             mr: 1,
+            width: '100%',
         },
         fetchButton: {
+            boxShadow: '0px 2px 5px rgba(0,0,0,0.6)',
             bgcolor: deepOrange[800],
             '&:hover': {
                 bgcolor: deepOrange[900],

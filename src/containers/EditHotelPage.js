@@ -65,7 +65,7 @@ const EditHotel = () => {
         try {
             const response = await axiosInstance.put(`/hotel-companies/update/${hotelId}`, hotel);
             if (response.status === 200) {
-                setSuccessMessage("Hotel company successfully updated");
+                setSuccessMessage("Your Hospitality-venue successfully updated");
                 setErrorMessage(""); // Clear any previous error
 
                 setTimeout(() => {

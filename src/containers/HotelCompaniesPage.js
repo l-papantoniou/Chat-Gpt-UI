@@ -87,7 +87,7 @@ const HotelCompaniesPage = () => {
         const handleDelete = async (hotelId) => {
             try {
                 const response = axiosInstance.delete(`/hotel-companies/delete/${hotelId}`)
-                setSuccessMessage("Your Hotel company has been successfully deleted");
+                setSuccessMessage("Your Hospitality-Venue has been successfully deleted");
                 setErrorMessage(""); // Clear any previous error
 
                 setTimeout(() => {

@@ -8,12 +8,14 @@ import {useNavigate} from "react-router-dom";
 import CustomSnackbar from "../shared/CustomSnackBar";
 import TextField from "@mui/material/TextField";
 import InfoIcon from "@mui/icons-material/Info";
+import {Loading} from "../shared/Loading";
+import {amenityOptions} from "../statics/amenityOptions";
 
 export const InputHotelPage = () => {
 
     const [successMessage, setSuccessMessage] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
-    const [url, setUrl] = useState('');
+    const [bookingUrl, setBookingUrl] = useState('');
     const [loading, setLoading] = useState(false);
 
     const navigate = useNavigate();
@@ -49,19 +51,78 @@ export const InputHotelPage = () => {
     };
 
     const handleUrlChange = (event) => {
-        setUrl(event.target.value);
+        setBookingUrl(event.target.value);
+        // Move cursor to the start of the text field
+        event.target.setSelectionRange(0, 0);
     };
-    const handleUrlSubmit = () => {
-        // Logic to handle the URL submission goes here
-        console.log("URL submitted: ", url);
-        // You would call a function here that sends the URL to the backend and fetches data
-    };
+    const transformScrapedAssets = (scrapedAssets) => {
+        // Initialize an object to hold the categorized amenities
+        const categorizedAssets = {};
+
+        // Iterate over the amenity options to set up the initial structure
+        Object.keys(amenityOptions).forEach((category) => {
+            categorizedAssets[category] = [];
+        });
+
+        // Iterate over the scraped assets
+        scrapedAssets.forEach((asset) => {
+            // Check each category to see if it includes the asset
+            Object.entries(amenityOptions).forEach(([category, {amenities}]) => {
+                if (amenities.includes(asset)) {
+                    // If the category includes the amenity, add it to the corresponding array
+                    categorizedAssets[category].push(asset);
+                }
+            });
+        });
+
+        // Clean up any empty categories
+        Object.keys(categorizedAssets).forEach((category) => {
+            if (categorizedAssets[category].length === 0) {
+                delete categorizedAssets[category];
+            }
+        });
+
+        return categorizedAssets;
+    }
+
+
+    const handleUrlSubmit = async () => {
+        setLoading(true); // Start loading
+        try {
+            const response = await axiosInstance.post('/booking/booking-scraper', {bookingUrl: bookingUrl});
+            console.log('Response Data:', response.data.response);
+
+            if (response.status === 200) {
+                console.log('Raw Scraped Assets:', response.data.response.assets);
+
+                const transformedAssets = transformScrapedAssets(response.data.response.assets);
+                console.log('Transformed Assets:', transformedAssets);
+
+                setHotel({
+                    ...hotel,
+                    ...response.data.response,
+                    hotelier: hotel.hotelier,
+                    assets: transformedAssets
+                });
+                setSuccessMessage("Your Hospitality-venue data have been successfully fetched");
+                setTimeout(() => setSuccessMessage(''), 2000);
+            } else {
+                setErrorMessage("Failed to fetch Hospitality-venue data from Booking.com");
+            }
+        } catch (error) {
+            console.error('Error occurred:', error);
+            setErrorMessage(error.response?.data?.message || 'An unexpected error occurred.');
+        } finally {
+            setLoading(false);
+        }
+    }
+
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
             const response = await axiosInstance.post('/hotel-companies/create', hotel);
             if (response.status === 201) {
-                setSuccessMessage("Hotel company successfully submitted");
+                setSuccessMessage("Your Hospitality-Venue successfully submitted");
                 setErrorMessage(""); // Clear any previous error
 
                 setTimeout(() => {
@@ -75,14 +136,15 @@ export const InputHotelPage = () => {
             setErrorMessage(error.message || 'An unexpected error occurred.');
             setSuccessMessage(''); // Clear any previous success message
         }
-    }
 
+    }
     return (
         <Box display="flex" justifyContent="center" alignItems="center" minHeight="100vh">
             <Grid container spacing={2}>
                 <Grid item xs={12}>
                     <Box display="flex" justifyContent="flex-end" alignItems="center" sx={styles.inputSection}>
-                        <Tooltip title="Learn more about URL autofill feature">
+                        <Tooltip
+                            title="Enter the Booking - URL of your existing hospitality venue to autofill the form">
                             <IconButton size="small" sx={styles.infoButton}>
                                 <InfoIcon/>
                             </IconButton>
@@ -93,16 +155,18 @@ export const InputHotelPage = () => {
                                 label="Booking URL"
                                 variant="outlined"
                                 size="medium"
-                                value={url}
-                                onChange={(e) => setUrl(e.target.value)}
+                                value={bookingUrl}
+                                onChange={handleUrlChange}
                                 sx={styles.inputField}
                             />
                         </Tooltip>
                         <Button variant="contained"
                                 onClick={handleUrlSubmit}
-                                disabled={url === ''}
+                                disabled={bookingUrl === ''}
                                 sx={styles.fetchButton}>
-                            Fetch Data
+                            <Typography color="white">
+                                Fetch Data
+                            </Typography>
                         </Button>
                     </Box>
                 </Grid>
@@ -115,6 +179,9 @@ export const InputHotelPage = () => {
                             onClose={handleSnackbarClose}
                             severity={successMessage ? "success" : "error"}
                         />
+                        {loading && (
+                            <Loading message={"Hang tight as we collect the data of your Hospitality-Venue.."}/>
+                        )}
                         <HotelForm
                             hotel={hotel}
                             setHotel={setHotel}
