@@ -37,7 +37,7 @@ const SettingsPage = () => {
                             <ListItemText primary="Email Preferences" secondary="Customize email settings"/>
                         </ListItem>
                     </List>
-                    <Divider />
+                    <Divider/>
 
                     <ListItem>
                         <ListItemText primary="Dark Mode"/>
@@ -50,8 +50,7 @@ const SettingsPage = () => {
                 </Paper>
             </Box>
         </Container>
-    )
-        ;
+    );
 };
 
 export default SettingsPage;

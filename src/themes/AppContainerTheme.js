@@ -61,7 +61,7 @@ export const useAppContainerStyles = () => {
             flexGrow: 1,
             padding: theme.spacing(3),
             marginTop: `${appBarHeight}px`,
-            height: '100vh',
+            height: '100%',
             transition: theme.transitions.create('marginLeft', {
                 easing: theme.transitions.easing.sharp,
                 duration: theme.transitions.duration.enteringScreen,

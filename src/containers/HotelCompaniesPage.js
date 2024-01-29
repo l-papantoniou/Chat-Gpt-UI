@@ -114,7 +114,7 @@ const HotelCompaniesPage = () => {
 
 
         return (
-            <Container maxWidth="md">
+            <Container maxWidth="lg">
                 <TableContainer component={Paper} sx={styles.tableContainer}>
                     <Table aria-label="simple table">
                         <TableHead>

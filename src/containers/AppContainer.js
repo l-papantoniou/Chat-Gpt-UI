@@ -65,7 +65,7 @@ export const AppContainer = ({children}) => {
 
             {/* Footer */}
             <Box component="footer"
-                 style={styles.footer} position="fixed" bottom="0">
+                 style={styles.footer} >
                 <Typography variant="body2">
                     © {new Date().getFullYear()} InnGenius. All rights reserved.
                 </Typography>
