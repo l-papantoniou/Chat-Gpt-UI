@@ -1,0 +1,21 @@
+.quill-dark-mode .ql-toolbar.ql-snow {
+    background-color: #b70d0d !important;
+    color: #fff !important;
+}
+
+.quill-dark-mode .ql-toolbar.ql-snow .ql-picker-label {
+    color: #fff !important;
+}
+
+.quill-dark-mode .ql-toolbar.ql-snow .ql-picker-item {
+    color: #fff !important;
+}
+
+.quill-dark-mode .ql-toolbar.ql-snow .ql-stroke {
+    stroke: #fff !important;
+}
+
+.quill-dark-mode .ql-toolbar.ql-snow .ql-fill,
+.quill-dark-mode .ql-toolbar.ql-snow .ql-stroke.ql-fill {
+    fill: #fff !important;
+}

@@ -1,5 +1,5 @@
 import {useTheme} from "@mui/material";
-import {deepOrange, orange, purple} from "@mui/material/colors";
+import {deepOrange} from "@mui/material/colors";
 
 export const useHotelFormStyle = () => {
     const theme = useTheme();

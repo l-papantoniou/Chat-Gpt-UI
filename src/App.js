@@ -13,6 +13,7 @@ import {AuthProvider} from './shared/AuthContext';
 import ProtectedRoute from "./routes/ProtectedRoute";
 import HotelCompaniesPage from "./containers/HotelCompaniesPage";
 import EditHotelPage from "./containers/EditHotelPage";
+import AIContentCreationPage from "./containers/AIContentCreationPage";
 
 const App = () => (
     <AuthProvider>
@@ -31,6 +32,7 @@ const App = () => (
                             <Route path="/settings" element={<SettingsPage/>}/>
                             <Route path="/hospitality-venues" element={<HotelCompaniesPage/>}/>
                             <Route path="/edit-hospitality-venue/:hotelId" element={<EditHotelPage/>}/>
+                            <Route path="/ai-content-creation" element={<AIContentCreationPage/>}/>
                             <Route path="*" element={<NotFoundPage/>}/>
                         </Route>
                     </Routes>
