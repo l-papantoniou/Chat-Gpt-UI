@@ -46,7 +46,6 @@ const EditHotel = () => {
         setHotel({...hotel, [name]: value});
     };
 
-
     useEffect(() => {
         const fetchHotelData = async () => {
             try {

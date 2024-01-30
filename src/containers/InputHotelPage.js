@@ -180,7 +180,7 @@ export const InputHotelPage = () => {
                             severity={successMessage ? "success" : "error"}
                         />
                         {loading && (
-                            <Loading message={"Hang tight as we collect the data of your Hospitality-Venue.."}/>
+                            <Loading initialMessage={"Hang tight as we collect the data of your Hospitality-Venue.."}/>
                         )}
                         <HotelForm
                             hotel={hotel}

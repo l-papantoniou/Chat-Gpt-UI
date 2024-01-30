@@ -29,7 +29,7 @@ export const amenityOptions = {
     },
     'Food & Drink': {
         icon: <FoodIcon/>,
-        amenities: ['Minibar', 'Electric kettle', 'Coffee machine', 'Dining table', 'Room service', 'Breakfast in the room', 'Very Good Breakfast', 'Tea/Coffee Maker in All Rooms', 'Restaurant', 'Bar']
+        amenities: ['Minibar', 'Electric kettle', 'Coffee machine', 'Dining table', 'Room service', 'Breakfast in the room', 'Good Breakfast', 'Very Good Breakfast', 'Tea/Coffee Maker in All Rooms', 'Restaurant', 'Bar']
     },
     'Services & Extras': {
         icon: <ServiceIcon/>,
@@ -53,7 +53,7 @@ export const amenityOptions = {
     },
     'Pool & Wellness': {
         icon: <PoolIcon/>,
-        amenities: ['Fitness centre', 'Spa', 'Spa and wellness centre', 'Massage', 'Hot tub/jacuzzi', 'Sauna', 'Outdoor pool', 'Indoor pool']
+        amenities: ['Fitness centre', 'Spa', 'Spa and wellness centre', 'Massage', 'Hot tub/jacuzzi', 'Sauna', 'Outdoor pool', 'Indoor pool', '2 swimming pools']
     },
     'Accessibility': {
         icon: <AccessibilityIcon/>,
