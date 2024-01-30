@@ -5,7 +5,8 @@ import {
     AccordionSummary,
     Box,
     Button,
-    Container, InputLabel,
+    Container,
+    InputLabel,
     ListItemIcon,
     ListItemText,
     MenuItem,
@@ -31,10 +32,14 @@ import GroupIcon from '@mui/icons-material/Group';
 import {targetAudienceOptions} from "../statics/targetAudienceOptions";
 import {seasonOptions} from "../statics/seasonOptions";
 import {useNavigate} from "react-router-dom";
+import {formatAssets, handleDownload} from "../utils/Utils";
+import {useAIContentPageTheme} from "../themes/AIContentPageTheme";
+import LightbulbIcon from '@mui/icons-material/Lightbulb';
 
 const AIContentCreationPage = () => {
     const {user} = useAuth();
     const navigate = useNavigate();
+    const styles = useAIContentPageTheme();
 
     const [selectedVenue, setSelectedVenue] = useState(null);
     const [selectedSeason, setSelectedSeason] = useState(null);
@@ -56,7 +61,6 @@ const AIContentCreationPage = () => {
     };
     const handleVenueChange = (event) => {
         setSelectedVenue(event.target.value);
-        // Fetch venue data and generate content
     };
 
     const fetchVenueOptions = async () => {
@@ -93,17 +97,6 @@ const AIContentCreationPage = () => {
         }
     };
 
-    const formatAssets = (assets) => {
-        if (assets === null) {
-            return null;
-        }
-        let selectedAssets = [];
-        for (const category in assets) {
-            if (assets[category].length > 0)
-                selectedAssets = selectedAssets.concat(assets[category]);
-        }
-        return selectedAssets.join(', ');
-    };
 
     const handleSaveClick = async () => {
         try {
@@ -130,29 +123,6 @@ const AIContentCreationPage = () => {
         }
     };
 
-    const handleDownload = () => {
-        // Create a Blob from the content string
-        const blob = new Blob([content], {type: 'text/plain'});
-
-        // Create a link element
-        const link = document.createElement("a");
-
-        // Set the download attribute with a filename
-        link.download = `content-${selectedVenue?.name || 'venue'}.txt`;
-
-        // Create a URL for the Blob and set it as href
-        link.href = window.URL.createObjectURL(blob);
-
-        // Append the link to the body
-        document.body.appendChild(link);
-
-        // Trigger click to download
-        link.click();
-
-        // Remove the link from the body
-        document.body.removeChild(link);
-    };
-
 
     useEffect(() => {
         fetchVenueOptions();
@@ -163,26 +133,14 @@ const AIContentCreationPage = () => {
             {loading &&
                 (<Loading
                     initialMessage={"Hang tight as we're using our most Advanced AI models, to generate your content..."}/>)}
-            <Box sx={{
-                minHeight: 100,
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'center',
-                alignItems: 'center',
-                p: 4,
-                backgroundColor: 'background.paper',
-                borderRadius: 2,
-                boxShadow: 3,
-                my: 4,
-                gap: 3,
-            }}>
-                <Typography variant="h5" component="h2"
-                            sx={{mb: 2, fontWeight: 'bold', color: 'primary.secondary'}}>
-                    AI Content Generator
-                </Typography>
 
+            <Box sx={styles.Box}>
+                <Typography variant="h5" component="h2"
+                            sx={styles.Typography}>
+                    <LightbulbIcon  sx={{mr: 1, fontSize: 30}}/> AI Content Generator
+                </Typography>
                 {/* Step 1: Select Venue */}
-                <Paper elevation={6} sx={{p: 3, width: '100%', bgcolor: 'background.level2'}}>
+                <Paper elevation={6} sx={styles.Paper}>
                     <Typography variant="h6" component="h3" sx={{mb: 2, fontWeight: 'medium'}}>
                         Step 1: Choose Your Venue
                     </Typography>
@@ -208,7 +166,7 @@ const AIContentCreationPage = () => {
                 </Paper>
 
 
-                <Paper elevation={6} sx={{p: 3, width: '100%', bgcolor: 'background.level2', mb: 3}}>
+                <Paper elevation={6} sx={styles.Paper}>
                     <Typography variant="h6" component="h3" sx={{mb: 2, fontWeight: 'medium'}}>
                         Step 2: Choose Season & Target Audience
                     </Typography>
@@ -261,7 +219,7 @@ const AIContentCreationPage = () => {
                 </Paper>
                 {
                     selectedVenue && selectedTargetAudience && selectedSeason && (
-                        <Paper elevation={6} sx={{p: 3, width: '100%', bgcolor: 'background.level2'}}>
+                        <Paper elevation={6} sx={styles.Paper}>
                             <Typography variant="h6" component="h3" sx={{mb: 2, fontWeight: 'medium'}}>
                                 Step 3: Review your selections
                             </Typography>
@@ -346,9 +304,10 @@ const AIContentCreationPage = () => {
                     <Typography variant="h6" component="h3" sx={{mb: 2, fontWeight: 'medium'}}>
                         Step 4: Press the button and let the magic begin..
                     </Typography>
-                    <Box sx={{width: '100%', display: 'flex', justifyContent: 'center', mb: 3}}>
-                        <Tooltip title="You must select the desired venue, season and audience first!"
-                                 placement="left">
+                    <Tooltip title="You must select the desired venue, season and audience first!"
+                             placement="left">
+                        <Box sx={{width: '100%', display: 'flex', justifyContent: 'center', mb: 3}}>
+
                             <Button
                                 variant="contained"
                                 color="secondary"
@@ -367,8 +326,8 @@ const AIContentCreationPage = () => {
                             >
                                 Generate Content
                             </Button>
-                        </Tooltip>
-                    </Box>
+                        </Box>
+                    </Tooltip>
                 </Paper>
 
                 {/* Step 4: Generate Content */}
@@ -399,7 +358,7 @@ const AIContentCreationPage = () => {
                                 variant="contained"
                                 color="secondary"
                                 startIcon={<DownloadIcon/>}
-                                onClick={handleDownload}
+                                onClick={handleDownload(content)}
                             >
                                 Download
                             </Button>
@@ -412,7 +371,6 @@ const AIContentCreationPage = () => {
                     onClose={handleSnackbarClose}
                     severity={successMessage ? "success" : "error"}
                 />
-
             </Box>
         </Container>
     )

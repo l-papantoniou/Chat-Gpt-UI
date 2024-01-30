@@ -21,6 +21,7 @@ import HotelIcon from '@mui/icons-material/Hotel';
 import InputAdornment from "@mui/material/InputAdornment";
 import {hotelCompanyTypes} from "../statics/hotelCompanyTypes";
 import {ErrorMessage} from "../shared/ErrorMessage";
+import {formatAssets} from "../utils/Utils";
 
 const HotelForm = ({hotel, setHotel, styles, errorMessage, handleInputChange, handleSubmit, clearForm}) => {
 
@@ -56,16 +57,6 @@ const HotelForm = ({hotel, setHotel, styles, errorMessage, handleInputChange, ha
         });
     };
 
-
-    // Display selected amenities as a comma-separated list
-    const formatAssets = (assets) => {
-        let selectedAssets = [];
-        for (const category in assets) {
-            if (assets[category].length > 0)
-                selectedAssets = selectedAssets.concat(assets[category]);
-        }
-        return selectedAssets.join(', ');
-    };
 
     return (
         <Paper elevation={3} sx={{p: 4, mt: 4, mb: 4}}>

@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import {Typography, Box, CircularProgress} from '@mui/material';
-import {formatTime} from "../utils/formatTime";
+import {formatTime} from "../utils/Utils";
 
 
 // CircularTimer component

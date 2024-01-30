@@ -27,6 +27,16 @@ export const useHotelCompaniesStyle = () => {
         tableCell: {
             fontSize: '0.875rem', // Smaller font size for table cells
         },
+
+        tableTitle:{
+            p: 2,
+            mb: 4,
+            borderRadius: '5px',
+            boxShadow: '0px 2px 4px rgba(0,0,0,0.1)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center'
+        }
         // Additional styles for buttons, icons, etc.
     };
 };

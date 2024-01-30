@@ -5,15 +5,25 @@ export const Loading = ({initialMessage}) => {
 
     const [message, setMessage] = useState(initialMessage);
 
-    const alternateMessage = "Just a little more. Hang tight..."
+    const firstAlternateMessage = "Still working on it, please wait a bit more...";
+    const secondAlternateMessage = "Just a little more. Hang tight..."
 
     useEffect(() => {
-        const timer = setTimeout(() => {
-            setMessage(alternateMessage);
-        }, 6000);
+        const firstTimer = setTimeout(() => {
+            setMessage(firstAlternateMessage);
 
-        return () => clearTimeout(timer);
-    }, [alternateMessage]);
+            // Set another timer for the second message change
+            const secondTimer = setTimeout(() => {
+                setMessage(secondAlternateMessage);
+            }, 5000);
+
+            // Clear the second timer when component unmounts or changes state
+            return () => clearTimeout(secondTimer);
+        }, 5000);
+
+        // Clear the first timer when component unmounts or changes state
+        return () => clearTimeout(firstTimer);
+    }, [firstAlternateMessage, secondAlternateMessage]);
 
     return (
         <Box

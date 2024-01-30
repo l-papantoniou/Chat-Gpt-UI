@@ -29,7 +29,7 @@ const TextDialogEditor = ({open, title, value, onChange, onClose, onSave}) => {
                     type="text"
                     fullWidth
                     multiline
-                    rows={6}
+                    rows={15}
                     variant="outlined"
                     value={value}
                     onChange={onChange}

@@ -37,7 +37,7 @@ export const amenityOptions = {
     },
     'Outdoor & View': {
         icon: <OutdoorIcon/>,
-        amenities: ['Balcony', 'Terrace', 'City view', 'Garden view', 'Pool view', 'Sea view', 'Mountain view', 'Landmark view']
+        amenities: ['Balcony', "Beachfront", 'Terrace', 'City view', 'Garden view', 'Pool view', 'Sea view', 'Mountain view', 'Landmark view']
     },
     'Parking & Transportation': {
         icon: <ParkingIcon/>,
