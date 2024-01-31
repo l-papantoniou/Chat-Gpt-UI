@@ -62,7 +62,7 @@ export const useLoginStyles = () => {
                 color: theme.palette.secondary.dark, // Darken color on hover
             }
         },
-        container:{
+        container: {
             height: '85vh',
             display: 'flex',
             flexDirection: 'column',

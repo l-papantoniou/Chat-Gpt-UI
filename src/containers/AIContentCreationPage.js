@@ -5,7 +5,7 @@ import {
     AccordionSummary,
     Box,
     Button,
-    Container,
+    Container, IconButton,
     InputLabel,
     ListItemIcon,
     ListItemText,
@@ -35,6 +35,7 @@ import {useNavigate} from "react-router-dom";
 import {formatAssets, handleDownload} from "../utils/Utils";
 import {useAIContentPageTheme} from "../themes/AIContentPageTheme";
 import LightbulbIcon from '@mui/icons-material/Lightbulb';
+import InfoIcon from "@mui/icons-material/Info";
 
 const AIContentCreationPage = () => {
     const {user} = useAuth();
@@ -80,15 +81,14 @@ const AIContentCreationPage = () => {
                 season: selectedSeason,
                 targetAudience: selectedTargetAudience
             };
-            console.log(payload);
-            // Replace with your actual API call
+
             const response = await axiosInstance.post('/chat/chat-gpt', payload);
             setContent(response.data.response);
             setSuccessMessage('Behold the content for you Hospitality Venue');
 
             setTimeout(() => {
                 setSuccessMessage('');
-            }, 2000); // Navigate after 1.5 seconds
+            }, 2000);
         } catch (err) {
             setErrorMessage('Failed to generate content');
             console.error(err);
@@ -137,32 +137,38 @@ const AIContentCreationPage = () => {
             <Box sx={styles.Box}>
                 <Typography variant="h5" component="h2"
                             sx={styles.Typography}>
-                    <LightbulbIcon  sx={{mr: 1, fontSize: 30}}/> AI Content Generator
+                    <LightbulbIcon sx={styles.lightBulbIcon}/> AI Content Generator
                 </Typography>
                 {/* Step 1: Select Venue */}
                 <Paper elevation={6} sx={styles.Paper}>
                     <Typography variant="h6" component="h3" sx={{mb: 2, fontWeight: 'medium'}}>
                         Step 1: Choose Your Venue
                     </Typography>
-                    <InputLabel id="select-venue">Select your desired venue</InputLabel>
-                    <Tooltip title="Select the venue for which you want to generate content" placement="left">
-                        <Select
-                            value={selectedVenue}
-                            onChange={handleVenueChange}
-                            displayEmpty
-                            fullWidth
-                            sx={{mb: 2}}
-                        >
-                            {venueOptions.map(venue => (
-                                <MenuItem key={venue.id} value={venue}>
-                                    <ListItemIcon>
-                                        {venue.id}
-                                    </ListItemIcon>
-                                    <ListItemText primary={venue.name}/>
-                                </MenuItem>
-                            ))}
-                        </Select>
-                    </Tooltip>
+                    <Box sx={{display: 'flex', alignItems: 'center', mb: 2}}>
+                        <Tooltip title="Select the venue for which you want to generate content" placement="left">
+                            <IconButton size="small" sx={styles.infoButton}>
+                                <InfoIcon/>
+                            </IconButton>
+                        </Tooltip>
+                        <InputLabel id="select-venue">Select your desired venue</InputLabel>
+                    </Box>
+
+                    <Select
+                        value={selectedVenue}
+                        onChange={handleVenueChange}
+                        displayEmpty
+                        fullWidth
+                        sx={{mb: 2}}
+                    >
+                        {venueOptions.map(venue => (
+                            <MenuItem key={venue.id} value={venue}>
+                                <ListItemIcon>
+                                    {venue.id}
+                                </ListItemIcon>
+                                <ListItemText primary={venue.name}/>
+                            </MenuItem>
+                        ))}
+                    </Select>
                 </Paper>
 
 
@@ -171,50 +177,60 @@ const AIContentCreationPage = () => {
                         Step 2: Choose Season & Target Audience
                     </Typography>
                     <Box sx={{mb: 3}}>
-                        <InputLabel id="season-select-label">Select Season</InputLabel>
-                        <Tooltip title="Select the desired season, for which you want to generate content"
-                                 placement="left">
-                            <Select
-                                labelId="season-select-label"
-                                value={selectedSeason}
-                                onChange={(e) => setSelectedSeason(e.target.value)}
-                                displayEmpty
-                                fullWidth
-                                sx={{mb: 2}}
-                            >
-                                {seasonOptions.map((item, id) => (
-                                    <MenuItem key={item.id} value={item.text}>
-                                        <ListItemIcon>
-                                            {item.icon}
-                                        </ListItemIcon>
-                                        <ListItemText primary={item.text}/>
-                                    </MenuItem>
-                                ))}
-                            </Select>
-                        </Tooltip>
+                        <Box sx={{display: 'flex', alignItems: 'center', mb: 2}}>
+                            <Tooltip title="Select the desired season, for which you want to generate content"
+                                     placement="left">
+                                <IconButton size="small" sx={styles.infoButton}>
+                                    <InfoIcon/>
+                                </IconButton>
+                            </Tooltip>
+                            <InputLabel id="season-select-label">Select Season</InputLabel>
+                        </Box>
 
-                        <InputLabel id="target-audience-select-label">Select Target Audience</InputLabel>
+                        <Select
+                            labelId="season-select-label"
+                            value={selectedSeason}
+                            onChange={(e) => setSelectedSeason(e.target.value)}
+                            displayEmpty
+                            fullWidth
+                            sx={{mb: 2}}
+                        >
+                            {seasonOptions.map((item, id) => (
+                                <MenuItem key={item.id} value={item.text}>
+                                    <ListItemIcon>
+                                        {item.icon}
+                                    </ListItemIcon>
+                                    <ListItemText primary={item.text}/>
+                                </MenuItem>
+                            ))}
+                        </Select>
 
-                        <Tooltip title="Select the desired target audience, for which you want to generate content"
-                                 placement="left">
-                            <Select
-                                label="season-select-label"
-                                value={selectedTargetAudience}
-                                onChange={(e) => setSelectedTargetAudience(e.target.value)}
-                                displayEmpty
-                                fullWidth
-                                inputProps={{'aria-label': 'Select target audience'}}
-                            >
-                                {targetAudienceOptions.map((item, id) => (
-                                    <MenuItem key={item.id} value={item.text}>
-                                        <ListItemIcon>
-                                            {item.icon}
-                                        </ListItemIcon>
-                                        <ListItemText primary={item.text}/>
-                                    </MenuItem>
-                                ))}
-                            </Select>
-                        </Tooltip>
+                        <Box sx={{display: 'flex', alignItems: 'center', mb: 2}}>
+                            <Tooltip title="Select the desired target audience, for which you want to generate content"
+                                     placement="left">
+                                <IconButton size="small" sx={styles.infoButton}>
+                                    <InfoIcon/>
+                                </IconButton>
+                            </Tooltip>
+                            <InputLabel id="target-audience-select-label">Select Target Audience</InputLabel>
+                        </Box>
+                        <Select
+                            label="season-select-label"
+                            value={selectedTargetAudience}
+                            onChange={(e) => setSelectedTargetAudience(e.target.value)}
+                            displayEmpty
+                            fullWidth
+                            inputProps={{'aria-label': 'Select target audience'}}
+                        >
+                            {targetAudienceOptions.map((item, id) => (
+                                <MenuItem key={item.id} value={item.text}>
+                                    <ListItemIcon>
+                                        {item.icon}
+                                    </ListItemIcon>
+                                    <ListItemText primary={item.text}/>
+                                </MenuItem>
+                            ))}
+                        </Select>
                     </Box>
                 </Paper>
                 {
@@ -313,16 +329,7 @@ const AIContentCreationPage = () => {
                                 color="secondary"
                                 disabled={!selectedVenue || !selectedSeason || !selectedTargetAudience}
                                 onClick={handleGenerateContent}
-                                sx={{
-                                    padding: '15px 20px',
-                                    backgroundColor: '#e1540b',
-                                    '&:hover': {
-                                        backgroundColor: '#af2e0a',
-                                    },
-                                    my: 2,
-                                    fontSize: '1.2rem',
-                                    boxShadow: '0px 0px 12px rgba(0, 0, 0, 0.3)',
-                                }}
+                                sx={styles.Button}
                             >
                                 Generate Content
                             </Button>
@@ -332,7 +339,7 @@ const AIContentCreationPage = () => {
 
                 {/* Step 4: Generate Content */}
                 {content &&
-                    <Paper elevation={6} sx={{p: 3, width: '100%', bgcolor: 'background.level2'}}>
+                    <Paper elevation={6} sx={styles.Paper}>
                         <Typography variant="h6" component="h3" sx={{mb: 2, fontWeight: 'medium'}}>
                             Step 5: Review & Edit Your Narrative
                         </Typography>
