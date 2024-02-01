@@ -40,6 +40,17 @@ export const useAIContentPageTheme = () => {
             boxShadow: '0px 0px 12px rgba(0, 0, 0, 0.3)'
         },
 
+        TranslateButton: {
+            padding: '10px 10px',
+            backgroundColor: '#e1540b',
+            '&:hover': {
+                backgroundColor: '#af2e0a',
+            },
+            my: 2,
+            fontSize: '1rem',
+            boxShadow: '0px 0px 12px rgba(0, 0, 0, 0.3)'
+        },
+
         Tooltip: {
             padding: '15px 20px',
             backgroundColor: '#ee4e4e',

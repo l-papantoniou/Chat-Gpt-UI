@@ -34,6 +34,7 @@ import {useNavigate} from "react-router-dom";
 import {useAIContentPageTheme} from "../themes/AIContentPageTheme";
 import InfoIcon from "@mui/icons-material/Info";
 import LightbulbIcon from '@mui/icons-material/Lightbulb';
+import {languageOptions} from "../statics/languageOptions";
 
 const AIContentCreationPage = () => {
     const {user} = useAuth();
@@ -50,6 +51,7 @@ const AIContentCreationPage = () => {
     const [errorMessage, setErrorMessage] = useState('');
     const [accordionExpanded, setAccordionExpanded] = useState(true);
     const [isEditable, setIsEditable] = useState(false);
+    const [translationLanguage, setTranslationLanguage] = useState('');
 
     const handleSnackbarClose = () => {
         setSuccessMessage('');
@@ -91,6 +93,26 @@ const AIContentCreationPage = () => {
             }, 2000); // Navigate after 1.5 seconds
         } catch (err) {
             setErrorMessage('Failed to generate content');
+            console.error(err);
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    const handleTranslateContent = async () => {
+        setLoading(true);
+        try {
+            // Replace with your actual translation API call
+            const payload = {
+                description: content,
+                targetLanguage: translationLanguage
+            };
+            const response = await axiosInstance.post('chat/chat-gpt/translate', payload);
+            setContent(response.data.response);
+            setSuccessMessage('Content translated successfully');
+            setTimeout(() => setSuccessMessage(''), 2000);
+        } catch (err) {
+            setErrorMessage('Failed to translate content');
             console.error(err);
         } finally {
             setLoading(false);
@@ -269,7 +291,7 @@ const AIContentCreationPage = () => {
                 </Paper>
                 {
                     selectedVenue && selectedTargetAudience && selectedSeason && (
-                        <Paper elevation={6} sx={{p: 3, width: '100%', bgcolor: 'background.level2'}}>
+                        <Paper elevation={6} sx={styles.Paper}>
                             <Typography variant="h6" component="h3" sx={{mb: 2, fontWeight: 'medium'}}>
                                 Step 3: Review your selections
                             </Typography>
@@ -349,8 +371,7 @@ const AIContentCreationPage = () => {
                         </Paper>
                     )
                 }
-                {/* Step 3: Generate Content Button */
-                }
+                {/* Step 3: Generate Content Button */}
                 <Paper elevation={6} sx={{p: 3, width: '100%', bgcolor: 'background.level2'}}>
                     <Typography variant="h6" component="h3" sx={{mb: 2, fontWeight: 'medium'}}>
                         Step 4: Press the button and let the magic begin..
@@ -407,6 +428,47 @@ const AIContentCreationPage = () => {
                         </Box>
                     </Paper>
                 }
+                {content && (
+                    <Paper elevation={6} sx={styles.Paper}>
+                        <Typography variant="h6" sx={{mb: 2, fontWeight: 'medium'}}>
+                            Step 6: Translate Your Content (Optional)
+                        </Typography>
+                        <Box sx={{display: 'flex', alignItems: 'center', mb: 2}}>
+                            <Tooltip title="Select the desired language you want the content to be translated"
+                                     placement="left">
+                                <IconButton size="small" sx={styles.infoButton}>
+                                    <InfoIcon/>
+                                </IconButton>
+                            </Tooltip>
+                            <InputLabel id="trnaslate-language-select-label">Select Translated Language</InputLabel>
+                        </Box>
+                        <Select
+                            value={translationLanguage}
+                            onChange={(e) => setTranslationLanguage(e.target.value)}
+                            displayEmpty
+                            fullWidth
+                            sx={{mb: 2}}
+                        >
+                            {languageOptions.map((option) => (
+                                <MenuItem key={option.id} value={option.text}>
+                                    <ListItemIcon>
+                                        {option.icon}
+                                    </ListItemIcon>
+                                    <ListItemText primary={option.text}/>
+                                </MenuItem>
+                            ))}
+                        </Select>
+                        <Button
+                            variant="contained"
+                            color="primary"
+                            onClick={handleTranslateContent}
+                            disabled={!translationLanguage}
+                            sx={styles.TranslateButton}
+                        >
+                            Translate
+                        </Button>
+                    </Paper>
+                )}
                 <CustomSnackbar
                     open={!!successMessage || !!errorMessage}
                     message={successMessage || errorMessage}

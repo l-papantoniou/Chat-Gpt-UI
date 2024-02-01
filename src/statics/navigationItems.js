@@ -7,8 +7,8 @@ import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 
 export const navigationItems = [
     {id: 1, text: 'Home', icon: <HomeIcon/>, route: '/'},
-    {id: 2, text: 'Hospitality Venues', icon: <HotelIcon/>, route: '/hospitality-venues'},
-    {id: 3, text: 'Add Hospitality Venue', icon: <AddCircleOutlineIcon/>, route: '/add-hospitality-venue'},
+    {id: 2, text: 'Tourist Accommodations', icon: <HotelIcon/>, route: '/hospitality-venues'},
+    {id: 3, text: 'Add Tourist Accommodations', icon: <AddCircleOutlineIcon/>, route: '/add-hospitality-venue'},
     {id: 4, text: 'AI Content-Creation', icon: <EmojiObjectsIcon/>, route: '/ai-content-creation'},
     {id: 5, text: 'About', icon: <InfoIcon/>, route: '/about'},
     {id: 6, text: 'Settings', icon: <SettingsIcon/>, route: '/settings'},

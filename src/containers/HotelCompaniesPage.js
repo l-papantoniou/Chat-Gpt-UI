@@ -119,7 +119,7 @@ const HotelCompaniesPage = () => {
                 <Box sx={styles.tableTitle}>
                     <ApartmentIcon sx={{mr: 1, color: '#4c617e'}}/>
                     <Typography variant="h4" component="h1" sx={{fontWeight: 'bold'}}>
-                        Your Hospitality Venues
+                        Your Tourist Accommodations
                     </Typography>
                 </Box>
                 <TableContainer component={Paper} sx={styles.tableContainer}>
