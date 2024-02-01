@@ -2,9 +2,11 @@ import React from 'react';
 import {Box, Container, Typography, Button, Card, CardContent, CardMedia, Paper} from '@mui/material';
 import AutoStoriesIcon from '@mui/icons-material/AutoStories';
 import {useAuth} from "../shared/AuthContext";
+import {useNavigate} from "react-router-dom";
 
 const HomePage = () => {
-    const {user} = useAuth()
+    const {user} = useAuth();
+    const navigate = useNavigate();
     return (
         <Container maxWidth="lg">
             <Paper elevation={3} sx={{my: 4, py: 4, textAlign: 'center', borderRadius: 3}}>
@@ -30,7 +32,8 @@ const HomePage = () => {
                 <Typography variant="h5" sx={{mb: 3}}>
                     Create Captivating Content Seamlessly
                 </Typography>
-                <Button variant="contained" color="primary" sx={{mb: 2}}>
+                <Button variant="contained" color="primary" sx={{mb: 2}}
+                        onClick={() => navigate('/ai-content-creation')}>
                     Start Creating
                 </Button>
 

@@ -8,7 +8,7 @@ import {
     TableHead,
     TableRow,
     Paper,
-    IconButton
+    IconButton, Typography, Box
 } from '@mui/material';
 import axiosInstance from "../utils/axiosInstance";
 import EditIcon from '@mui/icons-material/Edit';
@@ -20,6 +20,7 @@ import ConfirmDialog from "../shared/ConfirmDialog";
 import CustomSnackbar from "../shared/CustomSnackBar";
 import {TableSortLabel} from '@mui/material';
 import Tooltip from '@mui/material/Tooltip';
+import ApartmentIcon from '@mui/icons-material/Apartment';
 
 const HotelCompaniesPage = () => {
         const [successMessage, setSuccessMessage] = useState('');
@@ -115,6 +116,12 @@ const HotelCompaniesPage = () => {
 
         return (
             <Container maxWidth="lg">
+                <Box sx={styles.tableTitle}>
+                    <ApartmentIcon sx={{mr: 1, color: '#4c617e'}}/>
+                    <Typography variant="h4" component="h1" sx={{fontWeight: 'bold'}}>
+                        Your Hospitality Venues
+                    </Typography>
+                </Box>
                 <TableContainer component={Paper} sx={styles.tableContainer}>
                     <Table aria-label="simple table">
                         <TableHead>
