@@ -429,7 +429,7 @@ const AIContentCreationPage = () => {
                     </Paper>
                 }
                 {content && (
-                    <Paper elevation={6} sx={styles.Paper}>
+                    <Paper elevation={6} sx={styles.TranslationSection}>
                         <Typography variant="h6" sx={{mb: 2, fontWeight: 'medium'}}>
                             Step 6: Translate Your Content (Optional)
                         </Typography>
@@ -440,18 +440,20 @@ const AIContentCreationPage = () => {
                                     <InfoIcon/>
                                 </IconButton>
                             </Tooltip>
-                            <InputLabel id="trnaslate-language-select-label">Select Translated Language</InputLabel>
+                            <InputLabel id="trnaslate-language-select-label" sx={styles.SelectLabel}>Select Translated
+                                Language</InputLabel>
                         </Box>
                         <Select
                             value={translationLanguage}
                             onChange={(e) => setTranslationLanguage(e.target.value)}
                             displayEmpty
                             fullWidth
-                            sx={{mb: 2}}
+                            sx={styles.SelectMenu}
+
                         >
                             {languageOptions.map((option) => (
                                 <MenuItem key={option.id} value={option.text}>
-                                    <ListItemIcon>
+                                    <ListItemIcon sx={styles.SelectIcon}>
                                         {option.icon}
                                     </ListItemIcon>
                                     <ListItemText primary={option.text}/>

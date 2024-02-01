@@ -77,6 +77,30 @@ export const useAIContentPageTheme = () => {
                 color: deepOrange[900],
             },
         },
+        TranslationSection: {
+            p: 3,
+            width: '100%',
+            bgcolor: 'background.level2',
+            borderRadius: 2,
+            boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.1)',
+            mt: 2
+        },
+        SelectMenu: {
+            borderRadius: '15px',
+            border: '1px #ced4da',
+            mb: 2,
+            '& .MuiSelect-select': {
+                padding: '10px 15px'
+            }
+        },
+        SelectIcon: {
+            color: 'secondary.main',
+            mr: 1,
+            fontSize: '1.2rem'
+        },
+        SelectLabel: {
+            fontWeight: 'medium'
+        }
     }
 
 }
