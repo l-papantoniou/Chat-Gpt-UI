@@ -7,13 +7,23 @@ export const Loading = ({initialMessage}) => {
 
     const alternateMessage = "Just a little more. Hang tight..."
 
-    useEffect(() => {
-        const timer = setTimeout(() => {
-            setMessage(alternateMessage);
-        }, 6000);
+    // Second alternate message
+    const finalMessage = "Almost there, thank you for your patience.";
 
-        return () => clearTimeout(timer);
-    }, [alternateMessage]);
+    useEffect(() => {
+        const timer1 = setTimeout(() => {
+            setMessage(alternateMessage);
+        }, 6000); // Change message after 4 seconds
+
+        const timer2 = setTimeout(() => {
+            setMessage(finalMessage);
+        }, 12000); // Change message again after 8 seconds in total
+
+        return () => {
+            clearTimeout(timer1);
+            clearTimeout(timer2);
+        };
+    }, [initialMessage]); // Depend on the initialMessage so this effect resets if initialMessage changes
 
     return (
         <Box
