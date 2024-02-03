@@ -51,7 +51,7 @@ const AIContentCreationPage = () => {
     const [errorMessage, setErrorMessage] = useState('');
     const [accordionExpanded, setAccordionExpanded] = useState(true);
     const [isEditable, setIsEditable] = useState(false);
-    const [translationLanguage, setTranslationLanguage] = useState('');
+    const [translationLanguage, setTranslationLanguage] = useState(null);
 
     const handleSnackbarClose = () => {
         setSuccessMessage('');
@@ -104,11 +104,11 @@ const AIContentCreationPage = () => {
         try {
             // Replace with your actual translation API call
             const payload = {
-                description: content,
-                targetLanguage: translationLanguage
+                text: content,
+                targetLang: translationLanguage
             };
-            const response = await axiosInstance.post('chat/chat-gpt/translate', payload);
-            setContent(response.data.response);
+            const response = await axiosInstance.post('deepl/translate', payload);
+            setContent(response.data);
             setSuccessMessage('Content translated successfully');
             setTimeout(() => setSuccessMessage(''), 2000);
         } catch (err) {
@@ -452,7 +452,7 @@ const AIContentCreationPage = () => {
 
                         >
                             {languageOptions.map((option) => (
-                                <MenuItem key={option.id} value={option.text}>
+                                <MenuItem key={option.id} value={option.value}>
                                     <ListItemIcon sx={styles.SelectIcon}>
                                         {option.icon}
                                     </ListItemIcon>
