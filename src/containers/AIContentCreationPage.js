@@ -34,7 +34,11 @@ import {useNavigate} from "react-router-dom";
 import {useAIContentPageTheme} from "../themes/AIContentPageTheme";
 import InfoIcon from "@mui/icons-material/Info";
 import LightbulbIcon from '@mui/icons-material/Lightbulb';
+import LoyaltyIcon from '@mui/icons-material/Loyalty';
+import NotesIcon from '@mui/icons-material/Notes';
 import {languageOptions} from "../statics/languageOptions";
+import {sellingPointOptions} from "../statics/sellingPointOptions";
+import {contentLengthOptions} from "../statics/contentLengthOptions";
 
 const AIContentCreationPage = () => {
     const {user} = useAuth();
@@ -44,7 +48,10 @@ const AIContentCreationPage = () => {
     const [selectedVenue, setSelectedVenue] = useState(null);
     const [selectedSeason, setSelectedSeason] = useState(null);
     const [selectedTargetAudience, setSelectedTargetAudience] = useState(null);
+    const [selectedContentLength, setSelectedContentLength] = useState(null);
+    const [selectedSellingPoint, setSelectedSellingPoint] = useState(null);
     const [venueOptions, setVenueOptions] = useState([]);
+
     const [content, setContent] = useState(null);
     const [loading, setLoading] = useState(false);
     const [successMessage, setSuccessMessage] = useState('');
@@ -80,17 +87,18 @@ const AIContentCreationPage = () => {
             const payload = {
                 venue: selectedVenue,
                 season: selectedSeason,
-                targetAudience: selectedTargetAudience
+                targetAudience: selectedTargetAudience,
+                sellingPoint: selectedSellingPoint,
+                contentLength: selectedContentLength
             };
             console.log(payload);
-            // Replace with your actual API call
             const response = await axiosInstance.post('/chat/chat-gpt', payload);
             setContent(response.data.response);
             setSuccessMessage('Behold the content for you Hospitality Venue');
 
             setTimeout(() => {
                 setSuccessMessage('');
-            }, 2000); // Navigate after 1.5 seconds
+            }, 2000);
         } catch (err) {
             setErrorMessage('Failed to generate content');
             console.error(err);
@@ -108,7 +116,8 @@ const AIContentCreationPage = () => {
                 targetLang: translationLanguage
             };
             const response = await axiosInstance.post('deepl/translate', payload);
-            setContent(response.data);
+            console.log(response)
+            setContent(response.data.response);
             setSuccessMessage('Content translated successfully');
             setTimeout(() => setSuccessMessage(''), 2000);
         } catch (err) {
@@ -227,7 +236,7 @@ const AIContentCreationPage = () => {
                     </Select>
                 </Paper>
 
-
+                {/* Step 2: Select Options */}
                 <Paper elevation={6} sx={styles.Paper}>
                     <Typography variant="h6" component="h3" sx={{mb: 2, fontWeight: 'medium'}}>
                         Step 2: Choose Season & Target Audience
@@ -260,7 +269,6 @@ const AIContentCreationPage = () => {
                             ))}
                         </Select>
 
-
                         <Box sx={{display: 'flex', alignItems: 'center', mb: 2}}>
                             <Tooltip title="Select the desired target audience, for which you want to generate content"
                                      placement="left">
@@ -276,6 +284,7 @@ const AIContentCreationPage = () => {
                             onChange={(e) => setSelectedTargetAudience(e.target.value)}
                             displayEmpty
                             fullWidth
+                            sx={{mb: 2}}
                             inputProps={{'aria-label': 'Select target audience'}}
                         >
                             {targetAudienceOptions.map((item, id) => (
@@ -287,10 +296,64 @@ const AIContentCreationPage = () => {
                                 </MenuItem>
                             ))}
                         </Select>
+
+                        <Box sx={{display: 'flex', alignItems: 'center', mb: 2}}>
+                            <Tooltip title="Select the desired selling point in your generated content"
+                                     placement="left">
+                                <IconButton size="small" sx={styles.infoButton}>
+                                    <InfoIcon/>
+                                </IconButton>
+                            </Tooltip>
+                            <InputLabel id="selling-point-select-label">Select Selling Point</InputLabel>
+                        </Box>
+                        <Select
+                            id="selling-point-select"
+                            value={selectedSellingPoint}
+                            onChange={(e) => setSelectedSellingPoint(e.target.value)}
+                            displayEmpty
+                            fullWidth
+                        >
+                            {sellingPointOptions.map((option) => (
+                                <MenuItem key={option.id} value={option.value}>
+                                    <ListItemIcon>
+                                        {option.icon}
+                                    </ListItemIcon>
+                                    <ListItemText primary={option.text}/>
+                                </MenuItem>
+                            ))}
+                        </Select>
+
+                        <Box sx={{display: 'flex', alignItems: 'center', mb: 2, mt: 2}}>
+                            <Tooltip title="Select the desired length of the generated content"
+                                     placement="left">
+                                <IconButton size="small" sx={styles.infoButton}>
+                                    <InfoIcon/>
+                                </IconButton>
+                            </Tooltip>
+                            <InputLabel id="target-audience-select-label">Select Content Length</InputLabel>
+                        </Box>
+                        <Select
+                            id="content-length-select"
+                            value={selectedContentLength}
+                            onChange={(e) => setSelectedContentLength(e.target.value)}
+                            displayEmpty
+                            fullWidth
+                            sx={{mb: 2}}
+                        >
+                            {contentLengthOptions.map((option) => (
+                                <MenuItem key={option.id} value={option.value}>
+                                    <ListItemIcon>
+                                        {option.icon}
+                                    </ListItemIcon>
+                                    <ListItemText primary={option.text}/>
+                                </MenuItem>
+                            ))}
+                        </Select>
                     </Box>
+
                 </Paper>
                 {
-                    selectedVenue && selectedTargetAudience && selectedSeason && (
+                    selectedVenue && selectedTargetAudience && selectedSeason && selectedSellingPoint && selectedContentLength && (
                         <Paper elevation={6} sx={styles.Paper}>
                             <Typography variant="h6" component="h3" sx={{mb: 2, fontWeight: 'medium'}}>
                                 Step 3: Review your selections
@@ -349,7 +412,7 @@ const AIContentCreationPage = () => {
                                     id="venue-details-header"
                                 >
                                     <Typography variant="h6" component="h3" sx={{fontWeight: 'medium'}}>
-                                        Selected Season & Target Audience
+                                        Selected Options
                                     </Typography>
                                 </AccordionSummary>
                                 <AccordionDetails>
@@ -360,10 +423,21 @@ const AIContentCreationPage = () => {
                                         </Typography>
                                     </Box>
                                     <Box sx={{display: 'flex', alignItems: 'center', mb: 1}}>
-
                                         <Typography variant="body1" sx={{ml: 1}}>
                                             <GroupIcon sx={{mr: 1}}/>
-                                            TargetAudience: {selectedTargetAudience}
+                                            Target Audience: {selectedTargetAudience}
+                                        </Typography>
+                                    </Box>
+                                    <Box sx={{display: 'flex', alignItems: 'center', mb: 1}}>
+                                        <Typography variant="body1" sx={{ml: 1}}>
+                                            <LoyaltyIcon sx={{mr: 1}}/>
+                                            Selling Point: {selectedSellingPoint}
+                                        </Typography>
+                                    </Box>
+                                    <Box sx={{display: 'flex', alignItems: 'center', mb: 1}}>
+                                        <Typography variant="body1" sx={{ml: 1}}>
+                                            <NotesIcon sx={{mr: 1}}/>
+                                            Content Length: {selectedContentLength}
                                         </Typography>
                                     </Box>
                                 </AccordionDetails>
@@ -382,7 +456,7 @@ const AIContentCreationPage = () => {
                             <Button
                                 variant="contained"
                                 color="secondary"
-                                disabled={!selectedVenue || !selectedSeason || !selectedTargetAudience}
+                                disabled={!selectedVenue || !selectedSeason || !selectedTargetAudience || !selectedSellingPoint || !selectedContentLength}
                                 onClick={handleGenerateContent}
                                 sx={styles.Button}
                             >
@@ -428,49 +502,51 @@ const AIContentCreationPage = () => {
                         </Box>
                     </Paper>
                 }
-                {content && (
-                    <Paper elevation={6} sx={styles.TranslationSection}>
-                        <Typography variant="h6" sx={{mb: 2, fontWeight: 'medium'}}>
-                            Step 6: Translate Your Content (Optional)
-                        </Typography>
-                        <Box sx={{display: 'flex', alignItems: 'center', mb: 2}}>
-                            <Tooltip title="Select the desired language you want the content to be translated"
-                                     placement="left">
-                                <IconButton size="small" sx={styles.infoButton}>
-                                    <InfoIcon/>
-                                </IconButton>
-                            </Tooltip>
-                            <InputLabel id="trnaslate-language-select-label" sx={styles.SelectLabel}>Select Translated
-                                Language</InputLabel>
-                        </Box>
-                        <Select
-                            value={translationLanguage}
-                            onChange={(e) => setTranslationLanguage(e.target.value)}
-                            displayEmpty
-                            fullWidth
-                            sx={styles.SelectMenu}
+                {
+                    content && (
+                        <Paper elevation={6} sx={styles.TranslationSection}>
+                            <Typography variant="h6" sx={{mb: 2, fontWeight: 'medium'}}>
+                                Step 6: Translate Your Content (Optional)
+                            </Typography>
+                            <Box sx={{display: 'flex', alignItems: 'center', mb: 2}}>
+                                <Tooltip title="Select the desired language you want the content to be translated"
+                                         placement="left">
+                                    <IconButton size="small" sx={styles.infoButton}>
+                                        <InfoIcon/>
+                                    </IconButton>
+                                </Tooltip>
+                                <InputLabel id="trnaslate-language-select-label" sx={styles.SelectLabel}>Select Translated
+                                    Language</InputLabel>
+                            </Box>
+                            <Select
+                                value={translationLanguage}
+                                onChange={(e) => setTranslationLanguage(e.target.value)}
+                                displayEmpty
+                                fullWidth
+                                sx={styles.SelectMenu}
 
-                        >
-                            {languageOptions.map((option) => (
-                                <MenuItem key={option.id} value={option.value}>
-                                    <ListItemIcon sx={styles.SelectIcon}>
-                                        {option.icon}
-                                    </ListItemIcon>
-                                    <ListItemText primary={option.text}/>
-                                </MenuItem>
-                            ))}
-                        </Select>
-                        <Button
-                            variant="contained"
-                            color="primary"
-                            onClick={handleTranslateContent}
-                            disabled={!translationLanguage}
-                            sx={styles.TranslateButton}
-                        >
-                            Translate
-                        </Button>
-                    </Paper>
-                )}
+                            >
+                                {languageOptions.map((option) => (
+                                    <MenuItem key={option.id} value={option.value}>
+                                        <ListItemIcon sx={styles.SelectIcon}>
+                                            {option.icon}
+                                        </ListItemIcon>
+                                        <ListItemText primary={option.text}/>
+                                    </MenuItem>
+                                ))}
+                            </Select>
+                            <Button
+                                variant="contained"
+                                color="primary"
+                                onClick={handleTranslateContent}
+                                disabled={!translationLanguage}
+                                sx={styles.TranslateButton}
+                            >
+                                Translate
+                            </Button>
+                        </Paper>
+                    )
+                }
                 <CustomSnackbar
                     open={!!successMessage || !!errorMessage}
                     message={successMessage || errorMessage}
