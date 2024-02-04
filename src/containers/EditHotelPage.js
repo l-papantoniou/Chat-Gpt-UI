@@ -64,7 +64,7 @@ const EditHotel = () => {
         try {
             const response = await axiosInstance.put(`/hotel-companies/update/${hotelId}`, hotel);
             if (response.status === 200) {
-                setSuccessMessage("Your Hospitality-venue successfully updated");
+                setSuccessMessage("Το τουριστικό σας κατάλυμα ενημερώθηκε επιτυχώς");
                 setErrorMessage(""); // Clear any previous error
 
                 setTimeout(() => {
@@ -72,11 +72,11 @@ const EditHotel = () => {
                     navigate('/hospitality-venues'); // Update this with your actual route
                 }, 1500); // Navigate after 1.5 seconds
             } else {
-                setErrorMessage("Failed to update hotel company");
+                setErrorMessage("Η ενημέρωση των στοιχείων του καταλύματος σασ απέτυχε ");
             }
         } catch (error) {
             console.error('Error updating hotel data:', error);
-            setErrorMessage(error.message || 'An unexpected error occurred.');
+            setErrorMessage(error.message || 'Προέκυψε ένα απροσδόκητο σφάλμα.');
         }
     };
     return (

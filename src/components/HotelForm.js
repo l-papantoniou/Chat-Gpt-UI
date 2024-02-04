@@ -6,7 +6,7 @@ import {
     FormControl,
     Grid,
     IconButton,
-    InputLabel,
+    InputLabel, ListItemIcon, ListItemText,
     MenuItem,
     Paper,
     Select,
@@ -77,7 +77,7 @@ const HotelForm = ({hotel, setHotel, styles, errorMessage, handleInputChange, ha
                     </Grid>
                     <Grid item>
                         <Typography variant="h4" component="h1" gutterBottom sx={{fontWeight: 'bold'}}>
-                            Your Tourist Accommodation
+                            Τουριστικό κατάλυμα
                         </Typography>
                     </Grid>
                 </Grid>
@@ -88,7 +88,7 @@ const HotelForm = ({hotel, setHotel, styles, errorMessage, handleInputChange, ha
                     required
                     fullWidth
                     id="name"
-                    label="Hotel Name"
+                    label="Ονομασία καταλύματος"
                     name="name"
                     autoFocus
                     value={hotel.name}
@@ -101,41 +101,44 @@ const HotelForm = ({hotel, setHotel, styles, errorMessage, handleInputChange, ha
                     required
                     fullWidth
                     id="location"
-                    label="Hotel Location"
+                    label="Τοποθεσία καταλύματος"
                     name="location"
                     sx={styles.input}
                     value={hotel.location}
                     onChange={handleInputChange}
                 />
                 <FormControl fullWidth margin="normal">
-                    <InputLabel id="hotelCompanyType-label">Hotel Company Type</InputLabel>
+                    <InputLabel id="hotelCompanyType-label">Τύπος καταλύματος</InputLabel>
                     <Select
                         labelId="hotelCompanyType-label"
                         id="type"
                         name="type"
                         value={hotel.type}
-                        label="Hotel Company Type"
+                        label="Τύπος καταλύματος"
                         onChange={handleInputChange}
                         sx={{
                             minWidth: 1100, // Minimum width you want to maintain
                             maxWidth: 1100, // Maximum width or you can omit this if not needed
                         }}
                     >
-                        {hotelCompanyTypes.map((type) => (
-                            <MenuItem key={type} value={type}>
-                                {type}
+                        {hotelCompanyTypes.map((option) => (
+                            <MenuItem key={option.id} value={option.value}>
+                                <ListItemIcon sx={styles.SelectIcon}>
+                                    {option.icon}
+                                </ListItemIcon>
+                                <ListItemText primary={option.text}/>
                             </MenuItem>
                         ))}
                     </Select>
                 </FormControl>
                 <TextField
-                    label="Hotel Company Description"
+                    label="Περιγραφή καταλύματος"
                     fullWidth
                     margin="normal"
                     variant="outlined"
                     value={hotel.description}
                     onFocus={handleDescriptionDialog}
-                    placeholder="Click to edit description"
+                    placeholder="Κάντε κλικ για να επεξεργαστείτε την περιγραφή"
                     InputProps={{
                         readOnly: true,
                         endAdornment: (
@@ -149,14 +152,14 @@ const HotelForm = ({hotel, setHotel, styles, errorMessage, handleInputChange, ha
                 />
                 <TextDialogEditor
                     open={openDescriptionDialog}
-                    title="Hotel Company Description"
+                    title="Περιγραφή καταλύματος "
                     value={hotel.description}
                     onChange={handleDescriptionChange}
                     onClose={handleDescriptionDialog}
                     onSave={handleDescriptionDialog}
                 />
                 <TextField
-                    label="Amenities & Assets"
+                    label="Ανέσεις & Παροχές"
                     fullWidth
                     margin="normal"
                     variant="outlined"
@@ -172,7 +175,7 @@ const HotelForm = ({hotel, setHotel, styles, errorMessage, handleInputChange, ha
                             </InputAdornment>
                         ),
                     }}
-                    placeholder="Click to select amenities"
+                    placeholder="Κάντε κλικ για να επιλέξετε παροχές"
                 />
                 <AmenitiesDialog
                     open={amenitiesDialogOpen}
@@ -184,12 +187,12 @@ const HotelForm = ({hotel, setHotel, styles, errorMessage, handleInputChange, ha
                 <Grid container spacing={2} justifyContent="space-between" sx={{mt: 2}}>
                     <Grid item>
                         <Button variant="contained" color="secondary" onClick={clearForm} sx={styles.clearButton}>
-                            Clear
+                            Καθαρισμος
                         </Button>
                     </Grid>
                     <Grid item>
                         <Button type="submit" variant="contained" color="primary" sx={styles.submitButton}>
-                            Save
+                            Αποθηκευση
                         </Button>
                     </Grid>
                 </Grid>

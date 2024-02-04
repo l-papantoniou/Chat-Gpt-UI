@@ -14,7 +14,7 @@ const AmenitiesDialog = ({open, onClose, selectedAssets, onAmenityToggle}) => {
     return (
         <Dialog open={open} onClose={onClose} fullWidth maxWidth="md">
             <DialogTitle sx={{m: 0, p: 2}}>
-                Select Amenities & Assets
+                    Επιλέξτε Ανέσεις & Παροχές
                 <IconButton
                     aria-label="close"
                     onClick={onClose}
@@ -55,7 +55,7 @@ const AmenitiesDialog = ({open, onClose, selectedAssets, onAmenityToggle}) => {
                 ))}
             </DialogContent>
             <DialogActions>
-                <Button onClick={onClose} color="inherit">Done</Button>
+                <Button onClick={onClose} color="inherit">Αποθηκευση</Button>
             </DialogActions>
         </Dialog>
     );

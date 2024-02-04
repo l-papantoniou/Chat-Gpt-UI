@@ -8,12 +8,12 @@ import GroupIcon from '@mui/icons-material/Group';
 
 
 export const targetAudienceOptions = [
-    {id: 1, text: 'Families', icon: <FamilyRestroomIcon/>},
-    {id: 2, text: 'Couples', icon: <FavoriteIcon/>},
-    {id: 3, text: 'Business Travelers', icon: <BusinessCenterIcon/>},
-    {id: 4, text: 'Solo Travelers', icon: <PersonIcon/>},
-    {id: 5, text: 'Adventure Seekers', icon: <AdventureIcon/>},
-    {id: 6, text: 'Senior Travelers', icon: <ElderlyIcon/>},
-    {id: 7, text: 'Groups & Events', icon: <GroupIcon/>},
+    {id: 1, text: 'Οικογένειες', value: 'Families', icon: <FamilyRestroomIcon/>},
+    {id: 2, text: 'Ζευγάρια', value: 'Couples', icon: <FavoriteIcon/>},
+    {id: 3, text: 'Ταξιδιώτες για επαγγελματικούς λόγους', value: 'Business Travelers', icon: <BusinessCenterIcon/>},
+    {id: 4, text: 'Σόλο ταξιδιώτες', value: 'Solo Travelers', icon: <PersonIcon/>},
+    {id: 5, text: 'Αναζητητές περιπέτειας', value: 'Adventure Seekers', icon: <AdventureIcon/>},
+    {id: 6, text: 'Ταξιδιώτες μεγαλύτερης ηλικίας', value: 'Senior Travelers', icon: <ElderlyIcon/>},
+    {id: 7, text: 'Ομάδες & εκδηλώσεις', value: 'Groups & Events', icon: <GroupIcon/>},
 
 ];

@@ -31,7 +31,7 @@ export const SignUp = () => {
         event.preventDefault();
         // Perform validation, make sure passwords match, etc.
         if (inputs.password !== inputs.confirmPassword) {
-            setErrorMessage("Passwords don't match.");
+            setErrorMessage("Οι κωδικοί δεν ταιριάζουν.");
             return;
         }
         try {
@@ -39,11 +39,8 @@ export const SignUp = () => {
             login(response.data.token, response.data.newUser.id, response.data.newUser.username);
             navigate('/');
 
-            // Send data to your API or server
-            // const response = await yourSignUpFunction(inputs);
-            // Handle response
         } catch (error) {
-            setErrorMessage(error.message || 'An unexpected error occurred.');
+            setErrorMessage(error.message || 'Προέκυψε ένα απροσδόκητο σφάλμα.');
             console.error('Sign up error', error);
         }
     };

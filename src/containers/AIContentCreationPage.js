@@ -77,7 +77,7 @@ const AIContentCreationPage = () => {
             const response = await axiosInstance.get(`/hotel-companies/user/${user.id}`);
             setVenueOptions(response.data);
         } catch (err) {
-            setErrorMessage('Failed to fetch venues');
+            setErrorMessage('Αποτυχία ανάκτησης καταλυμάτων');
             console.error(err);
         }
     };
@@ -91,16 +91,15 @@ const AIContentCreationPage = () => {
                 sellingPoint: selectedSellingPoint,
                 contentLength: selectedContentLength
             };
-            console.log(payload);
             const response = await axiosInstance.post('/chat/chat-gpt', payload);
             setContent(response.data.response);
-            setSuccessMessage('Behold the content for you Hospitality Venue');
+            setSuccessMessage('Ιδού, το περιεχόμενο του καταλύματος σας ');
 
             setTimeout(() => {
                 setSuccessMessage('');
             }, 2000);
         } catch (err) {
-            setErrorMessage('Failed to generate content');
+            setErrorMessage('Αποτυχία δημιουργίας περιεχομένου');
             console.error(err);
         } finally {
             setLoading(false);
@@ -116,12 +115,11 @@ const AIContentCreationPage = () => {
                 targetLang: translationLanguage
             };
             const response = await axiosInstance.post('deepl/translate', payload);
-            console.log(response)
             setContent(response.data.response);
-            setSuccessMessage('Content translated successfully');
+            setSuccessMessage('Το περιεχόμενο μεταφράστηκε με επιτυχία');
             setTimeout(() => setSuccessMessage(''), 2000);
         } catch (err) {
-            setErrorMessage('Failed to translate content');
+            setErrorMessage('Αποτυχία μετάφρασης περιεχομένου');
             console.error(err);
         } finally {
             setLoading(false);
@@ -149,7 +147,7 @@ const AIContentCreationPage = () => {
             const response = await axiosInstance.put(`/hotel-companies/update/${selectedVenue.id}`, updatedVenue);
 
             if (response.status === 200) {
-                setSuccessMessage('Content updated successfully');
+                setSuccessMessage('Το περιεχόμενο ενημερώθηκε με επιτυχία');
                 setErrorMessage("")
                 setIsEditable(false);
                 setTimeout(() => {
@@ -157,10 +155,10 @@ const AIContentCreationPage = () => {
                     navigate('/hospitality-venues');
                 }, 1500);
             } else {
-                setErrorMessage('Failed to update content');
+                setErrorMessage('Αποτυχία ενημέρωσης περιεχομένου');
             }
         } catch (err) {
-            setErrorMessage('Failed to update content');
+            setErrorMessage('Αποτυχία ενημέρωσης περιεχομένου');
             console.error(err);
         }
     };
@@ -197,26 +195,27 @@ const AIContentCreationPage = () => {
         <Container maxWidth="lg">
             {loading &&
                 (<Loading
-                    initialMessage={"Hang tight as we're using our most Advanced AI models, to generate your content..."}/>)}
+                    initialMessage={"Περιμένετε, καθώς χρησιμοποιούμε τα πιο προηγμένα μοντέλα τεχνητής νοημοσύνης μας, για να δημιουργήσουμε το περιεχόμενό σας..."}/>)}
 
             <Box sx={styles.Box}>
                 <Typography variant="h5" component="h2"
                             sx={styles.Typography}>
-                    <LightbulbIcon sx={styles.lightBulbIcon}/> AI Content Generator
+                    <LightbulbIcon sx={styles.lightBulbIcon}/> Δημιουργός περιεχομένου AI
                 </Typography>
 
                 {/* Step 1: Select Venue */}
                 <Paper elevation={6} sx={styles.Paper}>
                     <Typography variant="h6" component="h3" sx={styles.Typography}>
-                        Step 1: Choose Your Venue
+                        Βήμα 1: Επιλέξτε το τουριστικό σας κατάλυμα
                     </Typography>
                     <Box sx={{display: 'flex', alignItems: 'center', mb: 2}}>
-                        <Tooltip title="Select the venue for which you want to generate content" placement="left">
+                        <Tooltip title="Επιλέξτε το κατάλυμα για το οποίο θέλετε να δημιουργήσετε περιεχόμενο"
+                                 placement="left">
                             <IconButton size="small" sx={styles.infoButton}>
                                 <InfoIcon/>
                             </IconButton>
                         </Tooltip>
-                        <InputLabel id="select-venue">Select your desired venue</InputLabel>
+                        <InputLabel id="select-venue">Επιλέξτε το τουριστικό σας κατάλυμα</InputLabel>
                     </Box>
                     <Select
                         value={selectedVenue}
@@ -239,17 +238,18 @@ const AIContentCreationPage = () => {
                 {/* Step 2: Select Options */}
                 <Paper elevation={6} sx={styles.Paper}>
                     <Typography variant="h6" component="h3" sx={{mb: 2, fontWeight: 'medium'}}>
-                        Step 2: Choose Season & Target Audience
+                        Βήμα 2: Επιλέξτε ρυθμίσεις
                     </Typography>
                     <Box sx={{mb: 3}}>
                         <Box sx={{display: 'flex', alignItems: 'center', mb: 2}}>
-                            <Tooltip title="Select the desired season, for which you want to generate content"
-                                     placement="left">
+                            <Tooltip
+                                title="Επιλέξτε την επιθυμητή εποχή, για την οποία θέλετε να δημιουργήσετε περιεχόμενο."
+                                placement="left">
                                 <IconButton size="small" sx={styles.infoButton}>
                                     <InfoIcon/>
                                 </IconButton>
                             </Tooltip>
-                            <InputLabel id="season-select-label">Select Season</InputLabel>
+                            <InputLabel id="season-select-label">Επιλέξτε εποχή</InputLabel>
                         </Box>
                         <Select
                             labelId="season-select-label"
@@ -259,24 +259,25 @@ const AIContentCreationPage = () => {
                             fullWidth
                             sx={{mb: 2}}
                         >
-                            {seasonOptions.map((item, id) => (
-                                <MenuItem key={item.id} value={item.text}>
+                            {seasonOptions.map((option) => (
+                                <MenuItem key={option.id} value={option.value}>
                                     <ListItemIcon>
-                                        {item.icon}
+                                        {option.icon}
                                     </ListItemIcon>
-                                    <ListItemText primary={item.text}/>
+                                    <ListItemText primary={option.text}/>
                                 </MenuItem>
                             ))}
                         </Select>
 
                         <Box sx={{display: 'flex', alignItems: 'center', mb: 2}}>
-                            <Tooltip title="Select the desired target audience, for which you want to generate content"
-                                     placement="left">
+                            <Tooltip
+                                title="Επιλέξτε το επιθυμητό ακροατήριο , για το οποίο θέλετε να δημιουργήσετε περιεχόμενο."
+                                placement="left">
                                 <IconButton size="small" sx={styles.infoButton}>
                                     <InfoIcon/>
                                 </IconButton>
                             </Tooltip>
-                            <InputLabel id="target-audience-select-label">Select Target Audience</InputLabel>
+                            <InputLabel id="target-audience-select-label">Επιλέξτε το ακρωατήριο</InputLabel>
                         </Box>
                         <Select
                             label="season-select-label"
@@ -285,26 +286,26 @@ const AIContentCreationPage = () => {
                             displayEmpty
                             fullWidth
                             sx={{mb: 2}}
-                            inputProps={{'aria-label': 'Select target audience'}}
+                            inputProps={{'aria-label': 'Επιλέξτε το ακρωατήριο'}}
                         >
-                            {targetAudienceOptions.map((item, id) => (
-                                <MenuItem key={item.id} value={item.text}>
+                            {targetAudienceOptions.map((option) => (
+                                <MenuItem key={option.id} value={option.value}>
                                     <ListItemIcon>
-                                        {item.icon}
+                                        {option.icon}
                                     </ListItemIcon>
-                                    <ListItemText primary={item.text}/>
+                                    <ListItemText primary={option.text}/>
                                 </MenuItem>
                             ))}
                         </Select>
 
                         <Box sx={{display: 'flex', alignItems: 'center', mb: 2}}>
-                            <Tooltip title="Select the desired selling point in your generated content"
+                            <Tooltip title="Επιλέξτε την επιθυμητή ανάδειξη στο παραγόμενο περιεχόμενό σας"
                                      placement="left">
                                 <IconButton size="small" sx={styles.infoButton}>
                                     <InfoIcon/>
                                 </IconButton>
                             </Tooltip>
-                            <InputLabel id="selling-point-select-label">Select Selling Point</InputLabel>
+                            <InputLabel id="selling-point-select-label">Επιλέξτε highlight</InputLabel>
                         </Box>
                         <Select
                             id="selling-point-select"
@@ -324,13 +325,13 @@ const AIContentCreationPage = () => {
                         </Select>
 
                         <Box sx={{display: 'flex', alignItems: 'center', mb: 2, mt: 2}}>
-                            <Tooltip title="Select the desired length of the generated content"
+                            <Tooltip title="Επιλέξτε την επιθυμητή έκταση του παραγόμενου περιεχομένου"
                                      placement="left">
                                 <IconButton size="small" sx={styles.infoButton}>
                                     <InfoIcon/>
                                 </IconButton>
                             </Tooltip>
-                            <InputLabel id="target-audience-select-label">Select Content Length</InputLabel>
+                            <InputLabel id="target-audience-select-label">Επιλέξτε έκταση περιεχομένου</InputLabel>
                         </Box>
                         <Select
                             id="content-length-select"
@@ -356,7 +357,7 @@ const AIContentCreationPage = () => {
                     selectedVenue && selectedTargetAudience && selectedSeason && selectedSellingPoint && selectedContentLength && (
                         <Paper elevation={6} sx={styles.Paper}>
                             <Typography variant="h6" component="h3" sx={{mb: 2, fontWeight: 'medium'}}>
-                                Step 3: Review your selections
+                                Βήμα 3: Επανεξετάστε τις επιλογές σας
                             </Typography>
                             <Accordion expanded={accordionExpanded}
                                        onChange={() => setAccordionExpanded(!accordionExpanded)}>
@@ -366,7 +367,7 @@ const AIContentCreationPage = () => {
                                     id="venue-details-header"
                                 >
                                     <Typography variant="h6" component="h3" sx={{fontWeight: 'medium'}}>
-                                        Venue Details
+                                        Λεπτομέρειες καταλύματος
                                     </Typography>
                                 </AccordionSummary>
                                 <AccordionDetails>
@@ -379,26 +380,26 @@ const AIContentCreationPage = () => {
                                     <Box sx={{display: 'flex', alignItems: 'center', mb: 1}}>
                                         <Typography variant="body1" sx={{ml: 1}}>
                                             <TextFieldsIcon sx={{mr: 1}}/>
-                                            Name: {selectedVenue.name}
+                                            Όνομα: {selectedVenue.name}
                                         </Typography>
                                     </Box>
                                     <Box sx={{display: 'flex', alignItems: 'center', mb: 1}}>
                                         <Typography variant="body1" sx={{ml: 1}}>
                                             <BusinessIcon sx={{mr: 1}}/>
-                                            Type: {selectedVenue.type}
+                                            Τύπος: {selectedVenue.type}
                                         </Typography>
                                     </Box>
                                     <Box sx={{display: 'flex', alignItems: 'center', mb: 1}}>
 
                                         <Typography variant="body1" sx={{ml: 1}}>
                                             <DescriptionIcon sx={{mr: 1}}/>
-                                            Description: {selectedVenue.description}
+                                            Περιγραφή: {selectedVenue.description}
                                         </Typography>
                                     </Box>
                                     <Box sx={{display: 'flex', alignItems: 'center', mb: 1}}>
                                         <Typography variant="body1" sx={{ml: 1}}>
                                             <ListAltIcon sx={{mr: 1}}/>
-                                            Assets: {formatAssets(selectedVenue.assets)}
+                                            Παροχές: {formatAssets(selectedVenue.assets)}
                                         </Typography>
                                     </Box>
                                 </AccordionDetails>
@@ -412,32 +413,32 @@ const AIContentCreationPage = () => {
                                     id="venue-details-header"
                                 >
                                     <Typography variant="h6" component="h3" sx={{fontWeight: 'medium'}}>
-                                        Selected Options
+                                        Επιλεγμένες ρυθμίσεις
                                     </Typography>
                                 </AccordionSummary>
                                 <AccordionDetails>
                                     <Box sx={{display: 'flex', alignItems: 'center', mb: 1}}>
                                         <Typography variant="body1" sx={{ml: 1}}>
                                             <CalendarMonthIcon sx={{mr: 1}}/>
-                                            Target Season: {selectedSeason}
+                                            Εποχή: {selectedSeason}
                                         </Typography>
                                     </Box>
                                     <Box sx={{display: 'flex', alignItems: 'center', mb: 1}}>
                                         <Typography variant="body1" sx={{ml: 1}}>
                                             <GroupIcon sx={{mr: 1}}/>
-                                            Target Audience: {selectedTargetAudience}
+                                            Ακρωατήριο: {selectedTargetAudience}
                                         </Typography>
                                     </Box>
                                     <Box sx={{display: 'flex', alignItems: 'center', mb: 1}}>
                                         <Typography variant="body1" sx={{ml: 1}}>
                                             <LoyaltyIcon sx={{mr: 1}}/>
-                                            Selling Point: {selectedSellingPoint}
+                                            Highlight: {selectedSellingPoint}
                                         </Typography>
                                     </Box>
                                     <Box sx={{display: 'flex', alignItems: 'center', mb: 1}}>
                                         <Typography variant="body1" sx={{ml: 1}}>
                                             <NotesIcon sx={{mr: 1}}/>
-                                            Content Length: {selectedContentLength}
+                                            Έκταση περιεχομένου: {selectedContentLength}
                                         </Typography>
                                     </Box>
                                 </AccordionDetails>
@@ -448,10 +449,10 @@ const AIContentCreationPage = () => {
                 {/* Step 3: Generate Content Button */}
                 <Paper elevation={6} sx={{p: 3, width: '100%', bgcolor: 'background.level2'}}>
                     <Typography variant="h6" component="h3" sx={{mb: 2, fontWeight: 'medium'}}>
-                        Step 4: Press the button and let the magic begin..
+                        Βήμα 4: Πατήστε το κουμπί και αφήστε το ΑΙ να αναλάβει..
                     </Typography>
                     <Box sx={{width: '100%', display: 'flex', justifyContent: 'center', mb: 3}}>
-                        <Tooltip title="You must select the desired venue, season and audience first!"
+                        <Tooltip title="Πρέπει πρώτα να επιλέξετε το επιθυμητό κατάλυμα, την εποχή και το κοινό.!"
                                  placement="left">
                             <Button
                                 variant="contained"
@@ -460,7 +461,7 @@ const AIContentCreationPage = () => {
                                 onClick={handleGenerateContent}
                                 sx={styles.Button}
                             >
-                                Generate Content
+                                Δημιουργια Περιεχομενου
                             </Button>
                         </Tooltip>
                     </Box>
@@ -471,7 +472,7 @@ const AIContentCreationPage = () => {
                     content &&
                     <Paper elevation={6} sx={styles.Paper}>
                         <Typography variant="h6" component="h3" sx={{mb: 2, fontWeight: 'medium'}}>
-                            Step 5: Review & Edit Your Narrative
+                            Βήμα 5: Επανεξέταση και επεξεργασία του περιεχομένου
                         </Typography>
                         <TextField
                             multiline
@@ -486,10 +487,10 @@ const AIContentCreationPage = () => {
                         {/* Additional Buttons for Save, Download etc. */}
                         <Box sx={{display: 'flex', justifyContent: 'space-between'}}>
                             <Button variant="contained" color="secondary" onClick={() => setIsEditable(!isEditable)}>
-                                Edit
+                                Επεξεργασια
                             </Button>
                             <Button variant="contained" color="primary" onClick={handleSaveClick}>
-                                Save
+                                Αποθηκευση
                             </Button>
                             <Button
                                 variant="contained"
@@ -497,7 +498,7 @@ const AIContentCreationPage = () => {
                                 startIcon={<DownloadIcon/>}
                                 onClick={handleDownload}
                             >
-                                Download
+                                Ληψη
                             </Button>
                         </Box>
                     </Paper>
@@ -506,17 +507,18 @@ const AIContentCreationPage = () => {
                     content && (
                         <Paper elevation={6} sx={styles.TranslationSection}>
                             <Typography variant="h6" sx={{mb: 2, fontWeight: 'medium'}}>
-                                Step 6: Translate Your Content (Optional)
+                                Βήμα 6: Μεταφράστε το περιεχόμενό σας (προαιρετικό)
                             </Typography>
                             <Box sx={{display: 'flex', alignItems: 'center', mb: 2}}>
-                                <Tooltip title="Select the desired language you want the content to be translated"
+                                <Tooltip title="Επιλέξτε την επιθυμητή γλώσσα στην οποία θέλετε να μεταφραστεί το περιεχόμενο"
                                          placement="left">
                                     <IconButton size="small" sx={styles.infoButton}>
                                         <InfoIcon/>
                                     </IconButton>
                                 </Tooltip>
-                                <InputLabel id="trnaslate-language-select-label" sx={styles.SelectLabel}>Select Translated
-                                    Language</InputLabel>
+                                <InputLabel id="trnaslate-language-select-label" sx={styles.SelectLabel}>
+                                    Επιλέξτε γλώσσα μετάφρασης
+                                </InputLabel>
                             </Box>
                             <Select
                                 value={translationLanguage}
@@ -542,7 +544,7 @@ const AIContentCreationPage = () => {
                                 disabled={!translationLanguage}
                                 sx={styles.TranslateButton}
                             >
-                                Translate
+                                Μεταφραση
                             </Button>
                         </Paper>
                     )

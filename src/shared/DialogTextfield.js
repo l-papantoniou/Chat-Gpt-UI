@@ -25,7 +25,7 @@ const TextDialogEditor = ({open, title, value, onChange, onClose, onSave}) => {
                     autoFocus
                     margin="dense"
                     id="text"
-                    label="Edit Text"
+                    label="Επεξεργασία"
                     type="text"
                     fullWidth
                     multiline
@@ -37,10 +37,10 @@ const TextDialogEditor = ({open, title, value, onChange, onClose, onSave}) => {
             </DialogContent>
             <DialogActions>
                 <Button onClick={onClose} color="inherit">
-                    Cancel
+                    Ακυρωση
                 </Button>
                 <Button onClick={onSave} color="inherit">
-                    Save
+                    Αποθηκευση
                 </Button>
             </DialogActions>
         </Dialog>

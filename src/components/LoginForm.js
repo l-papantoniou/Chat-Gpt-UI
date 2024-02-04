@@ -11,7 +11,7 @@ export const LoginForm = ({inputs, handleInputChange, onSubmitLoginForm, styles,
                 <LockIcon/>
             </Avatar>
             <Typography sx={styles.typographyLogin}>
-                Login
+                Είσοδος
             </Typography>
             <ErrorMessage message={errorMessage}/>
             <Box component="form" onSubmit={onSubmitLoginForm}>
@@ -30,7 +30,7 @@ export const LoginForm = ({inputs, handleInputChange, onSubmitLoginForm, styles,
                     required
                     fullWidth
                     id="password"
-                    label="Password"
+                    label="Κωδικός"
                     type="password"
                     name="password"
                     autoComplete="off"
@@ -44,12 +44,12 @@ export const LoginForm = ({inputs, handleInputChange, onSubmitLoginForm, styles,
                     variant="contained"
                     sx={styles.submitButton}
                 >
-                    Sign In
+                    Σύνδεση
                 </Button>
                 <br/>
                 <Grid container justifyContent="flex-end" sx={{mt: 2}}>
                     <Link to="/register" style={styles.link}>
-                        Don't have an account? Sign Up
+                        Δεν έχετε λογαριασμό; Εγγραφείτε
                     </Link>
                 </Grid>
             </Box>

@@ -11,7 +11,7 @@ export const SignUpForm = ({inputs, handleInputChange, onSubmitSignInForm, style
                 <AccountCircleIcon/>
             </Avatar>
             <Typography sx={styles.typographyLogin}>
-                Sign Up
+                Εγγραφείτε
             </Typography>
             <ErrorMessage message={errorMessage}/>
             <Box component="form" onSubmit={onSubmitSignInForm}>
@@ -19,7 +19,7 @@ export const SignUpForm = ({inputs, handleInputChange, onSubmitSignInForm, style
                     required
                     fullWidth
                     id="email"
-                    label="Email Address"
+                    label="Διεύθυνση Email"
                     name="email"
                     autoComplete="email"
                     value={inputs.email}
@@ -30,7 +30,7 @@ export const SignUpForm = ({inputs, handleInputChange, onSubmitSignInForm, style
                     required
                     fullWidth
                     id="username"
-                    label="Username"
+                    label="Όνομα Χρήστη"
                     name="username"
                     autoComplete="username"
                     value={inputs.username}
@@ -41,7 +41,7 @@ export const SignUpForm = ({inputs, handleInputChange, onSubmitSignInForm, style
                     required
                     fullWidth
                     name="password"
-                    label="Password"
+                    label="Κωδικός"
                     type="password"
                     id="password"
                     autoComplete="new-password"
@@ -53,7 +53,7 @@ export const SignUpForm = ({inputs, handleInputChange, onSubmitSignInForm, style
                     required
                     fullWidth
                     name="confirmPassword"
-                    label="Confirm Password"
+                    label="Επιβεβαίωση Κωδικού"
                     type="password"
                     id="confirmPassword"
                     autoComplete="new-password"
@@ -67,12 +67,12 @@ export const SignUpForm = ({inputs, handleInputChange, onSubmitSignInForm, style
                     variant="contained"
                     sx={styles.submitButton}
                 >
-                    Sign Up
+                    Εγγραφή
                 </Button>
                 <br/>
                 <Grid container justifyContent="flex-end" sx={{mt: 2}}>
                     <Link to="/login" style={styles.link}>
-                        Already have an account? Login
+                        Έχετε ήδη λογαριασμό; Συνδεθείτε
                     </Link>
                 </Grid>
             </Box>

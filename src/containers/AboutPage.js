@@ -12,7 +12,7 @@ const AboutPage = () => {
         <Container component="main" maxWidth="lg">
             <Box style={styles.hero}>
                 <Typography variant="h2" align="center" style={styles.typography}>
-                    Empowering Hospitality with AI: Transform Your Content Strategy
+                    Δημιουργία περιεχομένου τουριστικών καταλυμάτων με την δύναμη του AI
                 </Typography>
             </Box>
 
@@ -23,7 +23,9 @@ const AboutPage = () => {
                     </CardMedia>
                     <CardContent>
                         <Typography variant="body1" paragraph>
-                            Elevate your accommodation's appeal with AI-crafted content, meticulously designed to capture your unique brand voice and offerings.
+                            Αναβαθμίστε την απήχηση του καταλύματός σας με περιεχόμενο σχεδιασμένο με τεχνητή νοημοσύνη,
+                            το οποίο έχει σχεδιαστεί σχολαστικά για να να αποτυπώσει τη μοναδική χροιά της και τις
+                            παροχές του καταλύματός σσας.
                         </Typography>
                     </CardContent>
                 </Card>
@@ -34,7 +36,8 @@ const AboutPage = () => {
                     </CardMedia>
                     <CardContent>
                         <Typography variant="body1" paragraph>
-                            Break language barriers and reach a global audience with advanced AI translation, tailored for diverse visitors.
+                            Σπάστε τα γλωσσικά σύνορα και προσεγγίστε ένα παγκόσμιο κοινό με την προηγμένη μετάφραση AI,
+                            προσαρμοσμένη για διαφορετικούς επισκέπτες.
                         </Typography>
                     </CardContent>
                 </Card>
@@ -45,13 +48,14 @@ const AboutPage = () => {
                     </CardMedia>
                     <CardContent>
                         <Typography variant="body1" paragraph>
-                            Stay ahead of the curve by leveraging AI-driven market insights to adapt your content strategy to evolving guest expectations.
+                            Παραμείνετε στην κορυφή των εξελίξεων, αξιοποιώντας τις γνώσεις της αγοράς με βάση την Τεχνητή Νοημοσύνη,
+                            για να προσαρμόσετε τη στρατηγική περιεχομένου σας στις εξελισσόμενες προσδοκίες των επισκεπτών.
                         </Typography>
                     </CardContent>
                 </Card>
             </Box>
 
-                {/* Add more cards if needed to cover other aspects of your AI application */}
+            {/* Add more cards if needed to cover other aspects of your AI application */}
         </Container>
     )
 }

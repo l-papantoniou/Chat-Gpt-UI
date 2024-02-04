@@ -122,7 +122,7 @@ export const InputHotelPage = () => {
         try {
             const response = await axiosInstance.post('/hotel-companies/create', hotel);
             if (response.status === 201) {
-                setSuccessMessage("Your Hospitality-Venue successfully submitted");
+                setSuccessMessage("Το τουριστικό σας κατάλυμα δημιουργήθηκε επιτυχώς");
                 setErrorMessage(""); // Clear any previous error
 
                 setTimeout(() => {
@@ -130,10 +130,10 @@ export const InputHotelPage = () => {
                     navigate('/hospitality-venues'); // Update this with your actual route
                 }, 1500); // Navigate after 1.5 seconds
             } else {
-                setErrorMessage("Failed to create hotel company");
+                setErrorMessage("Η δημιουργία τουριστικού καταλύματος απέτυχε");
             }
         } catch (error) {
-            setErrorMessage(error.message || 'An unexpected error occurred.');
+            setErrorMessage(error.message || 'Προέκυψε ένα απροσδόκητο σφάλμα.');
             setSuccessMessage(''); // Clear any previous success message
         }
 
@@ -144,28 +144,25 @@ export const InputHotelPage = () => {
                 <Grid item xs={12}>
                     <Box display="flex" justifyContent="flex-end" alignItems="center" sx={styles.inputSection}>
                         <Tooltip
-                            title="Enter the Booking - URL of your existing hospitality venue to autofill the form">
+                            title="Εισάγετε το Booking - URL του υπάρχοντος καταλύματος σας για αυτόματη συμπλήρωση της φόρμας">
                             <IconButton size="small" sx={styles.infoButton}>
                                 <InfoIcon/>
                             </IconButton>
                         </Tooltip>
-                        <Tooltip
-                            title="Enter the Booking - URL of your existing hospitality venue to autofill the form">
-                            <TextField
-                                label="Booking URL"
-                                variant="outlined"
-                                size="medium"
-                                value={bookingUrl}
-                                onChange={handleUrlChange}
-                                sx={styles.inputField}
-                            />
-                        </Tooltip>
+                        <TextField
+                            label="Booking URL"
+                            variant="outlined"
+                            size="medium"
+                            value={bookingUrl}
+                            onChange={handleUrlChange}
+                            sx={styles.inputField}
+                        />
                         <Button variant="contained"
                                 onClick={handleUrlSubmit}
                                 disabled={bookingUrl === ''}
                                 sx={styles.fetchButton}>
                             <Typography color="white">
-                                Fetch Data
+                                Ανακτηση δεδομενων
                             </Typography>
                         </Button>
                     </Box>

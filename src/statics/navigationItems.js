@@ -6,12 +6,12 @@ import SettingsIcon from '@mui/icons-material/Settings';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 
 export const navigationItems = [
-    {id: 1, text: 'Home', icon: <HomeIcon/>, route: '/'},
-    {id: 2, text: 'Tourist Accommodations', icon: <HotelIcon/>, route: '/hospitality-venues'},
-    {id: 3, text: 'Add Tourist Accommodations', icon: <AddCircleOutlineIcon/>, route: '/add-hospitality-venue'},
-    {id: 4, text: 'AI Content-Creation', icon: <EmojiObjectsIcon/>, route: '/ai-content-creation'},
-    {id: 5, text: 'About', icon: <InfoIcon/>, route: '/about'},
-    {id: 6, text: 'Settings', icon: <SettingsIcon/>, route: '/settings'},
+    {id: 1, text: 'Αρχική', icon: <HomeIcon/>, route: '/'},
+    {id: 2, text: 'Τουριστικά Καταλύματα', icon: <HotelIcon/>, route: '/hospitality-venues'},
+    {id: 3, text: 'Προσθήκη τουριστικού καταλύματος', icon: <AddCircleOutlineIcon/>, route: '/add-hospitality-venue'},
+    {id: 4, text: 'Δημιουργία περιεχομένου AI', icon: <EmojiObjectsIcon/>, route: '/ai-content-creation'},
+    {id: 5, text: 'Σχετικά', icon: <InfoIcon/>, route: '/about'},
+    {id: 6, text: 'Ρυθμίσεις', icon: <SettingsIcon/>, route: '/settings'},
     // Add more items as needed
 ];
 

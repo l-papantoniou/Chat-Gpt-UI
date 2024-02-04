@@ -5,10 +5,10 @@ export const Loading = ({initialMessage}) => {
 
     const [message, setMessage] = useState(initialMessage);
 
-    const alternateMessage = "Just a little more. Hang tight..."
+    const alternateMessage = "Λίγο ακόμα. Κρατηθείτε σφιχτά..."
 
     // Second alternate message
-    const finalMessage = "Almost there, thank you for your patience.";
+    const finalMessage = "Σχεδόν έτοιμο, σας ευχαριστούμε για την υπομονή σας..";
 
     useEffect(() => {
         const timer1 = setTimeout(() => {

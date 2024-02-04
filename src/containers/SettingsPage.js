@@ -10,31 +10,31 @@ const SettingsPage = () => {
         <Container maxWidth="md">
             <Box my={4}>
                 <Typography variant="h4" gutterBottom>
-                    Settings
+                    Ρυθμίσεις
                 </Typography>
                 <Paper elevation={3}>
                     <List component="nav" aria-label="mailbox folders">
                         <ListItem button>
-                            <ListItemText primary="Account Settings" secondary="Manage your account details"/>
+                            <ListItemText primary="Ρυθμίσεις λογαριασμού" secondary="Διαχειριστείτε τα στοιχεία του λογαριασμού σας"/>
                         </ListItem>
                         <Divider/>
                         <ListItem button>
-                            <ListItemText primary="Notification Preferences" secondary="Customize your notifications"/>
-                        </ListItem>
-                        <Divider/>
-
-                        <ListItem button>
-                            <ListItemText primary="Language Preferences" secondary="Select your preferred language"/>
+                            <ListItemText primary="Notification Preferences" secondary="Προτιμήσεις ειδοποιήσεων"/>
                         </ListItem>
                         <Divider/>
 
                         <ListItem button>
-                            <ListItemText primary="Privacy Settings" secondary="Manage your privacy options"/>
+                            <ListItemText primary="Προτιμήσεις γλώσσας" secondary="Επιλέξτε τη γλώσσα προτίμησής σας"/>
                         </ListItem>
                         <Divider/>
 
                         <ListItem button>
-                            <ListItemText primary="Email Preferences" secondary="Customize email settings"/>
+                            <ListItemText primary="Ρυθμίσεις απορρήτου" secondary="Διαχειριστείτε τις επιλογές απορρήτου σας"/>
+                        </ListItem>
+                        <Divider/>
+
+                        <ListItem button>
+                            <ListItemText primary="Προτιμήσεις email" secondary="Προσαρμογή ρυθμίσεων email"/>
                         </ListItem>
                     </List>
                     <Divider/>

@@ -1,5 +1,5 @@
-import React, {useEffect, useState} from 'react';
-import {Toolbar, Box, IconButton, Typography, Button} from '@mui/material';
+import React from 'react';
+import {Box, Button, IconButton, Toolbar, Typography} from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import Brightness4Icon from '@mui/icons-material/Brightness4';
 import Brightness7Icon from '@mui/icons-material/Brightness7';
@@ -37,7 +37,7 @@ const AppToolbar = ({drawerOpen, handleDrawerToggle, styles}) => {
             />
 
             {/* Spacer to push the following items to the right */}
-            <Box marginLeft={160} flexGrow={4} sx={{display: 'flex', alignItems: 'center', gap: 2}}/>
+            <Box marginLeft={155} flexGrow={4} sx={{display: 'flex', alignItems: 'center', gap: 2}}/>
             <Box sx={{display: 'flex', alignItems: 'center', gap: 2}}>
 
                 {/* Right-aligned items */}
@@ -53,7 +53,7 @@ const AppToolbar = ({drawerOpen, handleDrawerToggle, styles}) => {
                 {/* Box to show logged-in user */}
                 {isAuthenticated &&
                     <Typography component="div" sx={{color: 'white', marginX: "15px", fontWeight: "bold"}}>
-                        User:
+                        Χρήστης:
                         <br/>
                         {user.username}
                     </Typography>
@@ -66,20 +66,21 @@ const AppToolbar = ({drawerOpen, handleDrawerToggle, styles}) => {
                     startIcon={<ExitToAppIcon/>}
                     disabled={!isAuthenticated}
                     sx={{
-                        borderColor: '#dad1d1', // Custom outline color
-                        backgroundColor: 'rgb(60,83,115)', // Optional background color on hover
+                        borderColor: '#dad1d1',
+                        backgroundColor: 'rgb(60,83,115)',
                         color: 'white',
                         marginX: "15px",
                         marginLeft: "0px",
                         fontWeight: 'bold',
+                        marginRight: "5px",
                         '&:hover': {
-                            borderColor: '#dad1d1', // Custom outline color on hover
-                            backgroundColor: 'rgb(57,77,103)', // Optional background color on hover
+                            borderColor: '#dad1d1',
+                            backgroundColor: 'rgb(57,77,103)',
                         },
                     }}
                     onClick={logout}
                 >
-                    Logout
+                    Αποσυνδεση
                 </Button>
             </Box>
         </Toolbar>

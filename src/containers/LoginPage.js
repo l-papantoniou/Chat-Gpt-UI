@@ -30,10 +30,10 @@ const Login = () => {
                 navigate('/')
             } else {
                 // Handle any non-200 responses here
-                setErrorMessage("Login failed. Please check your credentials.");
+                setErrorMessage("Η σύνδεση απέτυχε. Παρκαλώ ελέγξτε τα στοιχεία εισόδου σας.");
             }
         } catch (error) {
-            setErrorMessage(error.response?.data?.message || 'An unexpected error occurred');
+            setErrorMessage(error.response?.data?.message || 'Προέκυψε ένα απροσδόκητο σφάλμα');
             console.error('Login error', error);
         }
     };

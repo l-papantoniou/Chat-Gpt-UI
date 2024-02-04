@@ -22,19 +22,18 @@ const HomePage = () => {
                         mx: 'auto'
                     }}>
                         <Typography variant="h6" gutterBottom sx={{fontWeight: 'medium', color: 'white'}}>
-                            Welcome, {user.username}!
+                            Καλώς ήρθες, {user.username}!
                         </Typography>
                     </Paper>
                 )}
-                <Typography variant="h2" gutterBottom sx={{fontWeight: 'bold', mt: 4, mb: 2}}>
-                    Elevate Your Hotel's Story with AI
+                <Typography variant="h3" gutterBottom sx={{fontWeight: 'bold', mt: 4, mb: 2}}>
+                    Αναβαθμίστε το περιεχόμενο του τουριστικού σας καταλύματος σας, με την δύναμη της τεχνητής νοημοσύνης
                 </Typography>
-                <Typography variant="h5" sx={{mb: 3}}>
-                    Create Captivating Content Seamlessly
-                </Typography>
-                <Button variant="contained" color="primary" sx={{mb: 2}}
+                <Button variant="contained" color="secondary" sx={{my: 2}}
                         onClick={() => navigate('/ai-content-creation')}>
-                    Start Creating
+                    <Typography variant="h6" gutterBottom sx={{ color: 'white'}}>
+                        Ξεκινηστε  τωρα
+                    </Typography>
                 </Button>
 
                 <Box sx={{display: 'flex', justifyContent: 'center', mt: 4}}>
@@ -43,12 +42,12 @@ const HomePage = () => {
                             <AutoStoriesIcon sx={{fontSize: 80, color: 'primary.main'}}/>
                         </CardMedia>
                         <CardContent>
-                            <Typography gutterBottom variant="h6" component="div">
-                                AI-Powered Content Creation
+                            <Typography gutterBottom variant="h6" component="div" sx={{fontWeight: 'bold'}}>
+                                Δημιουργία περιεχομένου με τεχνητή νοημοσύνη
                             </Typography>
                             <Typography variant="body1">
-                                Leverage the power of generative AI to craft unique, engaging narratives for your hotel.
-                                Elevate your marketing and guest experiences with content that stands out.
+                                Αξιοποιήστε τη δύναμη της παραγωγικής τεχνητής νοημοσύνης για να δημιουργήσετε μοναδικές, ελκυστικές αφηγήσεις για τα τουριστικά σας καταλύματα.
+                                Αναβαθμίστε το μάρκετινγκ και τις εμπειρίες των επισκεπτών σας με περιεχόμενο που ξεχωρίζει.
                             </Typography>
                         </CardContent>
                     </Card>

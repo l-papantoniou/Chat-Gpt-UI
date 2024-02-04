@@ -117,9 +117,9 @@ const HotelCompaniesPage = () => {
         return (
             <Container maxWidth="lg">
                 <Box sx={styles.tableTitle}>
-                    <ApartmentIcon sx={{mr: 1, color: '#4c617e'}}/>
+                    <ApartmentIcon fontSize="large" sx={{mr: 1, color: '#4c617e'}}/>
                     <Typography variant="h4" component="h1" sx={{fontWeight: 'bold'}}>
-                        Your Tourist Accommodations
+                        Τα τουριστικά σας καταλύματα
                     </Typography>
                 </Box>
                 <TableContainer component={Paper} sx={styles.tableContainer}>
@@ -144,7 +144,7 @@ const HotelCompaniesPage = () => {
                                             direction={sortConfig.field === 'name' ? sortConfig.direction : 'asc'}
                                             onClick={() => handleSort('name')}
                                         >
-                                            Hotel Name
+                                            Όνομα Καταλύματος
                                         </TableSortLabel>
                                     </Tooltip>
                                 </TableCell>
@@ -155,7 +155,7 @@ const HotelCompaniesPage = () => {
                                             direction={sortConfig.field === 'location' ? sortConfig.direction : 'asc'}
                                             onClick={() => handleSort('location')}
                                         >
-                                            Location
+                                            Τοποθεσία
                                         </TableSortLabel>
                                     </Tooltip>
                                 </TableCell>
@@ -166,12 +166,12 @@ const HotelCompaniesPage = () => {
                                             direction={sortConfig.field === 'type' ? sortConfig.direction : 'asc'}
                                             onClick={() => handleSort('type')}
                                         >
-                                            Type
+                                            Τύπος
                                         </TableSortLabel>
                                     </Tooltip>
                                 </TableCell>
-                                <TableCell style={styles.tableHeadCell}>Edit</TableCell>
-                                <TableCell style={styles.tableHeadCell}>Delete</TableCell>
+                                <TableCell style={styles.tableHeadCell}>Επεξεργασία</TableCell>
+                                <TableCell style={styles.tableHeadCell}>Διαγραφή</TableCell>
                                 {/* Add more headers if needed */}
                             </TableRow>
                         </TableHead>
