@@ -17,10 +17,10 @@ const ConfirmDialog = ({open, handleClose, handleConfirm, title, description}) =
             </DialogContent>
             <DialogActions>
                 <Button onClick={handleClose} variant="contained" color="secondary">
-                    Cancel
+                    Ακύρωση
                 </Button>
                 <Button onClick={handleConfirm} variant="contained" color="error" autoFocus>
-                    Confirm
+                    Επιβεβαίωση
                 </Button>
             </DialogActions>
         </Dialog>

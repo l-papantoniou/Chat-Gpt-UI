@@ -201,8 +201,8 @@ const HotelCompaniesPage = () => {
                         open={openConfirmDialog}
                         handleClose={() => setOpenConfirmDialog(false)}
                         handleConfirm={handleConfirmDelete}
-                        title="Confirm Delete"
-                        description="Are you sure you want to delete this hotel company? This action cannot be undone."
+                        title="Επιβεβαίωση Διαγραφής"
+                        description="Είστε σίγουρος/η ότι θέλετε να διαγράψετε το τουριστικό σας κατάλυμα; Αυτή η ενέργεια δεν μπορεί να αναιρεθεί."
                     />
                     <CustomSnackbar
                         open={!!successMessage || !!errorMessage}
